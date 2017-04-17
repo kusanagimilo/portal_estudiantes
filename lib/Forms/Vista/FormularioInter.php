@@ -41,11 +41,11 @@ $formulario = $obj_forms->MostrarForm($id_tipo_proceso);
 
                                 $cam_iden = '"' . $value['campo_identi'] . '"';
 
-                                $lista = "<select onchange='MostrarOtro($cam_iden)' id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
+                                $lista = "<select style='width:100px;' onchange='MostrarOtro($cam_iden)' id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
                                                                 <option value=''>-seleccione-</option>";
                             } else {
 
-                                $lista = "<select id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
+                                $lista = "<select style='width:100px;' id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
                                                                 <option value=''>-seleccione-</option>";
                             }
 
@@ -79,13 +79,21 @@ $formulario = $obj_forms->MostrarForm($id_tipo_proceso);
                     } else if ($value['tipo_campo'] == 'HORA') {
                         $hora = "<select id='h_" . $value['campo_identi'] . "' name='h_" . $value['campo_identi'] . "'>";
                         for ($index1 = 0; $index1 < 24; $index1++) {
-                            $hora .= "<option value='" . $index1 . "'>" . $index1 . "</option>";
+                            if ($index1 < 10) {
+                                $hora .= "<option value='" . $index1 . "'>" . "0" . $index1 . "</option>";
+                            } else {
+                                $hora .= "<option value='" . $index1 . "'>" . $index1 . "</option>";
+                            }
                         }
                         $hora .= "</select>";
 
                         $minutos = "<select id='m_" . $value['campo_identi'] . "' name='m_" . $value['campo_identi'] . "'>";
-                        for ($index2 = 0; $index2 < 61; $index2++) {
-                            $minutos .= "<option value='" . $index2 . "'>" . $index2 . "</option>";
+                        for ($index2 = 0; $index2 < 60; $index2++) {
+                            if ($index2 < 10) {
+                                $minutos .= "<option value='" . $index2 . "'>" . "0" . $index2 . "</option>";
+                            } else {
+                                $minutos .= "<option value='" . $index2 . "'>" . $index2 . "</option>";
+                            }
                         }
                         $minutos .= "</select>";
                         ?>
