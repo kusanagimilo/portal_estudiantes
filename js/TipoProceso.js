@@ -54,7 +54,7 @@ function EliminarTdArchivos(id_td) {
 
 function AlmacenarTipoProceso() {
 
-    var extensiones_permitidas = new Array(".jpg", ".pdf", ".png", ".docx", ".xlsx", ".doc", ".xls");
+    var extensiones_permitidas = new Array(".jpg", ".pdf", ".png", ".docx", ".xlsx", ".doc", ".xls", ".msg");
 
 
     var formElement = document.getElementById("formula");

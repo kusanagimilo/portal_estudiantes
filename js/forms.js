@@ -47,7 +47,7 @@ function AlmacenarForm()
 }
 function AlmacenarArchivoCaso(id_caso) {
     var archivo = document.getElementById("archivo");
-    var extensiones_permitidas = new Array(".jpg", ".pdf", ".png", ".docx", ".xlsx", ".xls", ".doc");
+    var extensiones_permitidas = new Array(".jpg", ".pdf", ".png", ".docx", ".xlsx", ".xls", ".doc", ".msg");
     var formElement = document.getElementById("frm_forms");
     var data = new FormData(formElement);
     var file;
