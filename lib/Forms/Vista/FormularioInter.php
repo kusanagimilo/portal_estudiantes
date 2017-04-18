@@ -43,6 +43,10 @@ $formulario = $obj_forms->MostrarForm($id_tipo_proceso);
 
                                 $lista = "<select style='width:100px;' onchange='MostrarOtro($cam_iden)' id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
                                                                 <option value=''>-seleccione-</option>";
+                            } else if ($value['campo_identi'] == 'medio_cumplio_requisito') {
+                                $cam_iden = '"' . $value['campo_identi'] . '"';
+                                $lista = "<select style='width:100px;' onchange='MostrarOtro($cam_iden)' id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
+                                                                <option value=''>-seleccione-</option>";
                             } else {
 
                                 $lista = "<select style='width:100px;' id='" . $value['campo_identi'] . "' name='" . $value['campo_identi'] . "'>
@@ -63,6 +67,9 @@ $formulario = $obj_forms->MostrarForm($id_tipo_proceso);
                                 if ($value['campo_identi'] == 'motivo_inasistencia') {
 
                                     echo "<br><div id='cont_otro'></div>";
+                                } else if ($value['campo_identi'] == 'medio_cumplio_requisito') {
+
+                                    echo "<br><div id='des_ingles'></div>";
                                 }
                                 ?>
 
@@ -127,6 +134,23 @@ $formulario = $obj_forms->MostrarForm($id_tipo_proceso);
                         <td>
                             <textarea name="<?php echo $value['campo_identi'] ?>" id="<?php echo $value['campo_identi'] ?>">
                             </textarea>
+                        </td>
+
+                        <?php
+                    } else if ($value['tipo_campo'] == 'CHECKBOX') {
+                        $opciones_chk = explode(';', $value['opciones']);
+                        
+                        
+
+                        $chk = "";
+
+                        for ($index4 = 0; $index4 < count($opciones_chk); $index4++) {
+                            $chk.= "<input type='checkbox' name='" . $value['campo_identi'] . "[]' id='" . $value['campo_identi'] . "' value='" . utf8_encode($opciones_chk[$index4]) . "'> " . utf8_encode($opciones_chk[$index4]) . "<br>";
+                        }
+                        ?>
+
+                        <td>
+                            <?php echo $chk; ?>
                         </td>
 
                         <?php

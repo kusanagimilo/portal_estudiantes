@@ -65,21 +65,48 @@ AND cam.perm = 'total'";
             $sql_insert_1 .= $value['campo_identi'] . ",";
             $sql_insert_2 .= ":" . $value['campo_identi'] . ",";
 
-
-
-
             if ($value['tipo_campo'] == 'HORA') {
 
                 $hora = $data['h_' . $value['campo_identi']] . ":" . $data['m_' . $value['campo_identi']];
                 $arreglo_in[':' . $value['campo_identi']] = $hora;
+            } else if ($value['tipo_campo'] == 'CHECKBOX') {
+
+                $opc_chk = "";
+                for ($b = 0; $b < count($data[$value['campo_identi']]); $b++) {
+                    $opc_chk .= $data[$value['campo_identi']][$b] . ",";
+                }
+                $opc_chk = substr($opc_chk, 0, -1);
+                $arreglo_in[':' . $value['campo_identi']] = $opc_chk;
             } else {
                 $arreglo_in[':' . $value['campo_identi']] = $data['' . utf8_decode($value['campo_identi']) . ''];
             }
 
+
+
             if ($value['campo_identi'] == 'motivo_inasistencia' && $data['motivo_inasistencia'] == 'OTRO') {
+
                 $sql_insert_1 .= "otro_motivo_excusa,";
                 $sql_insert_2 .= ":otro_motivo_excusa,";
                 $arreglo_in[':otro_motivo_excusa'] = $data['otro_motivo_excusa'];
+            } else if ($value['campo_identi'] == 'motivo_inasistencia' && $data['motivo_inasistencia'] == 'INCONVENIENTE PERSONAL') {
+
+                $sql_insert_1 .= "situacion_fuerza_mayor,";
+                $sql_insert_2 .= ":situacion_fuerza_mayor,";
+                $arreglo_in[':situacion_fuerza_mayor'] = $data['situacion_fuerza_mayor'];
+            } else if ($value['campo_identi'] == 'medio_cumplio_requisito' && $data['medio_cumplio_requisito'] == 'NIVELES CURSADOS EN LA UNIVERSIDAD') {
+
+                $sql_insert_1 .= "nivel_clasificacion,nivel_cursado_aprobado,";
+                $sql_insert_2 .= ":nivel_clasificacion,:nivel_cursado_aprobado,";
+                $arreglo_in[':nivel_clasificacion'] = $data['nivel_clasificacion'];
+
+                $aprobados = "";
+
+                for ($a = 0; $a < count($data['nivel_cursado_aprobado']); $a++) {
+                    $aprobados .= $data['nivel_cursado_aprobado'][$a] . ",";
+                }
+                $aprobados = substr($aprobados, 0, -1);
+
+                $arreglo_in[':nivel_cursado_aprobado'] = $aprobados;
             }
         }
 
@@ -94,7 +121,7 @@ AND cam.perm = 'total'";
 
 
         $sql_insert = $sql_insert_1 . " VALUES " . $sql_insert_2;
-        
+
         //return var_dump($sql_insert);
 
         $result = $link->prepare($sql_insert);

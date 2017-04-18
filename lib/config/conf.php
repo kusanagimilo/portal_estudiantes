@@ -17,7 +17,7 @@ define('MOTOR', 'MYSQL');
 define('HOST', 'localhost');
 define('BD', 'portal_estudiantes');
 define('USUARIO', 'root');
-define('PASSWORD', '');
+define('PASSWORD', 'Camilo@64');
 
 define('LDAP_USR', "sisfito@ica.gov.co"); // en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
 define('LDAP_PASS', "Sirin201413");// en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior

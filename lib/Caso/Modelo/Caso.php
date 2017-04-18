@@ -19,7 +19,7 @@ class Caso {
 
     public function VerCasosDisponibles() {
 
-        session_start();
+        //session_start();
         $arreglo_sesion = $_SESSION['Usuario'];
 
         $obj_conexion = new BD();
@@ -100,7 +100,7 @@ where tipd.id_tipo_proceso = '" . $id_tipo_proceso . "'";
                 INNER JOIN tipo_proceso tip ON tip.id_tipo_proceso = ca.id_tipo_proceso 
                 INNER JOIN estado_proceso esp ON esp.id_estado_proceso = ca.id_estado";
         $resul = $obj_conexion->ResultSet($sql, $link);
-        
+
         //return $sql;
 
         foreach ($resul as $key => $value) {
@@ -169,7 +169,9 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
         foreach ($resul_info as $key => $value) {
 
             if ($value['campo_identi'] == 'motivo_inasistencia') {
-                $sql_ver .= "otro_motivo_excusa,";
+                $sql_ver .= "otro_motivo_excusa,situacion_fuerza_mayor,";
+            } else if ($value['campo_identi'] == 'medio_cumplio_requisito') {
+                $sql_ver .= "nivel_clasificacion,nivel_cursado_aprobado,";
             }
 
             $sql_ver .= $value['campo_identi'] . ",";
@@ -180,6 +182,8 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
 
 
         $resul_info2 = $obj_conexion->ResultSet($sql_ver, $link);
+
+        
 
         $tabla = "<table class='table table-bordered table-striped'>
                  <thead>
@@ -214,6 +218,27 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
             $tabla .= "<tr>
                         <td>OTRO</td>
                         <td>" . $resul_info2[0]['otro_motivo_excusa'] . "</td>
+                    </tr>";
+        }
+
+        if (@$resul_info2[0]['situacion_fuerza_mayor'] != NULL || @$resul_info2[0]['situacion_fuerza_mayor'] != "") {
+            $tabla .= "<tr>
+                        <td>SITUACION DE FUERZA MAYOR</td>
+                        <td>" . $resul_info2[0]['situacion_fuerza_mayor'] . "</td>
+                    </tr>";
+        }
+
+        if (@$resul_info2[0]['nivel_clasificacion'] != NULL || @$resul_info2[0]['nivel_clasificacion'] != "") {
+            $tabla .= "<tr>
+                        <td>NIVEL DE CLASIFICACION</td>
+                        <td>" . $resul_info2[0]['nivel_clasificacion'] . "</td>
+                    </tr>";
+        }
+
+        if (@$resul_info2[0]['nivel_cursado_aprobado'] != NULL || @$resul_info2[0]['nivel_cursado_aprobado'] != "") {
+            $tabla .= "<tr>
+                        <td>NIVELES CURSADOS Y APROBADOS</td>
+                        <td>" . $resul_info2[0]['nivel_cursado_aprobado'] . "</td>
                     </tr>";
         }
 

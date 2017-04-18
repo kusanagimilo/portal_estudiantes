@@ -120,12 +120,12 @@ class Usuario {
         $obj_conexion = new BD();
         $link = $obj_conexion->Conectar();
 
-        $conectado_LDAP = ldap_connect('ica.gov.co');
-        ldap_set_option($conectado_LDAP, LDAP_OPT_PROTOCOL_VERSION, 3);
-        ldap_set_option($conectado_LDAP, LDAP_OPT_REFERRALS, 0);
-        @$autenticado_LDAP = ldap_bind($conectado_LDAP, $data['nombre_usuario'] . "@ica.gov.co", $data['pass']);
+//        $conectado_LDAP = ldap_connect('ica.gov.co');
+//        ldap_set_option($conectado_LDAP, LDAP_OPT_PROTOCOL_VERSION, 3);
+//        ldap_set_option($conectado_LDAP, LDAP_OPT_REFERRALS, 0);
+//        @$autenticado_LDAP = ldap_bind($conectado_LDAP, $data['nombre_usuario'] . "@ica.gov.co", $data['pass']);
 
-        //$autenticado_LDAP = false;
+        $autenticado_LDAP = false;
 
 
         if ($autenticado_LDAP == true) {
