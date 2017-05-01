@@ -21,4 +21,16 @@ if ($opcion == 'CrearTipoProceso') {
 }if ($opcion == 'EliminaTipoProceso') {
     $retorno = $obj_tipo_proceso->EliminaTipoProceso($_POST);
     echo $retorno;
+}if ($opcion == 'MostrarInfoEditTipoProceso') {
+    $retorno = $obj_tipo_proceso->MostrarInfoEditTipoProceso($_POST);
+    echo $retorno;
+}if ($opcion == 'EliminarDocumentoTp') {
+    $retorno = $obj_tipo_proceso->EliminarDocumentoTp($_POST);
+    echo $retorno;
+}if ($opcion == 'AnadirDocumentoTp') {
+    $retorno = $obj_tipo_proceso->AnadirDocumentoTp($_POST, $_FILES);
+    echo $retorno;
+}if ($opcion == 'ModificarTp') {
+    $retorno = $obj_tipo_proceso->ModificarTp($_POST, $_FILES);
+    echo $retorno;
 }

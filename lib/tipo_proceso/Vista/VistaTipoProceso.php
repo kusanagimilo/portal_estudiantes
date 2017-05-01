@@ -5,19 +5,22 @@
     <thead>
         <tr>
             <th>Tipo proceso</th>
+             <th>Modificar tipo proceso</th>
             <th>Eliminar tipo proceso</th>
-                 
+
         </tr>
     </thead>
     <tfoot>
         <tr>
             <th>Tipo proceso</th>
-             <th>Eliminar tipo proceso</th>
-            
+            <th>Modificar tipo proceso</th>
+            <th>Eliminar tipo proceso</th>
+
         </tr>
     </tfoot>
 </table>
 <div id="dialog_n_tipo_proceso"></div>
+<div id="dialog_edt_tipo_proceso"></div>
 <script>
     var json = GridTipoProceso();
 
