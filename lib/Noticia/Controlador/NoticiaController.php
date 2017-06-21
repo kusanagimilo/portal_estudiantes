@@ -18,12 +18,12 @@ if ($opcion == 'NuevaNoticia') {
     if ($retorno == 1) {
         echo "<script>" .
         "alert('Ingreso correctamente la noticia');" .
-        "window.location.assign('../../../aplicacion.php')" .
+        "window.location.assign('../../../Aplicacion.php')" .
         "</script>";
     } else if ($retorno == 3) {
         echo "<script>" .
         "alert('Ocurrio un error al ingresar la noticia');" .
-        "window.location.assign('../../../aplicacion.php')" .
+        "window.location.assign('../../../Aplicacion.php')" .
         "</script>";
     }
 } else if ($opcion == 'VerNoticia') {

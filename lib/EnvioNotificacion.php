@@ -10,18 +10,19 @@ class EnvioNotificacion {
         $mail = new PHPMailer;
         $mail->isSMTP();
 
-        $mail->Host = 'smtp.gmail.com';//cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
-        $mail->Port = 587;//cambiar por el puerto por el cual se envian los correos en la javeriana
+        $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
+        $mail->Port = 587; //cambiar por el puerto por el cual se envian los correos en la javeriana
 
 
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = '';
         $mail->SMTPAuth = true;
-        $mail->Username = "kusanagimilo@gmail.com";//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->Password = "camilo@64";// en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
+        $mail->Username = "dept.ing.ind@javeriana.edu.co"; //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->Password = "Fabo3505"; // en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
 
 
-        $mail->setFrom('kusanagimilo@gmail.com', 'Universidad javeriana');//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->addReplyTo('kusanagimilo@gmail.com', 'Universidad javeriana');//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->setFrom('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->addReplyTo('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        // $mail->AddAddress("dept.ing.ind@javeriana.edu.co");//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
 
 
         foreach ($array_correos as $key => $value) {
@@ -94,20 +95,20 @@ ini;
         $mail = new PHPMailer;
         $mail->isSMTP();
 
-        $mail->Host = 'smtp.gmail.com';//cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
-        $mail->Port = 587;//cambiar por el puerto por el cual se envian los correos en la javeriana
+        $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
+        $mail->Port = 587; //cambiar por el puerto por el cual se envian los correos en la javeriana
 
 
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = '';
         $mail->SMTPAuth = true;
-        $mail->Username = "kusanagimilo@gmail.com";//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->Password = "camilo@64";// en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
+        $mail->Username = "dept.ing.ind@javeriana.edu.co"; //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->Password = "Fabo3505"; // en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
 
 
-        $mail->setFrom('kusanagimilo@gmail.com', 'Universidad javeriana');//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->addReplyTo('kusanagimilo@gmail.com', 'Universidad javeriana');//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->setFrom('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->addReplyTo('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
 
-        $mail->AddAddress("jccruz08@misena.edu.co");// en esta linea de codigo va el correo de destino donde se atienden todas las solicitudes que envian los usuarios
+        $mail->AddAddress("dept.ing.ind@javeriana.edu.co"); // en esta linea de codigo va el correo de destino donde se atienden todas las solicitudes que envian los usuarios
         $mail->Subject = "Atencion al cliente";
 
         $mensaje = <<<ini
@@ -165,9 +166,9 @@ if ($opcion == 'EnviarNotificacion') {
     $retorno = $a->EnviarCorreoContacto($_POST);
     if ($retorno == 2) {
         echo "<script>alert('no se logro enviar el mensaje');window.location.href='../index.php';</script>";
-        /*header('Location: ../index.php');*/
+        /* header('Location: ../index.php'); */
     } else if ($retorno == 1) {
         echo "<script>alert('mensaje enviado');window.location.href='../index.php';</script>";
-        /*header('Location: ../index.php');*/
+        /* header('Location: ../index.php'); */
     }
 }
