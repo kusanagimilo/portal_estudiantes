@@ -59,3 +59,65 @@ $(function(){
     });
 
 });
+
+function VerFormLogin() {
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "lib/Usuario/Vista/FormLogin.php",
+        async: false,
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    $("#contenido_ini").html(data);
+
+}
+
+function VerNoticiasIni() {
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "Noticias.php",
+        async: false,
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    $("#contenido_ini").html(data);
+
+}
+
+function VerDetalleNoticia(noticia) {
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "DetalleNoticia.php",
+        data: {
+            noticia: noticia
+        },
+        async: false,
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    $("#contenido_ini").html(data);
+}
+
+function VerContacto() {
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "contacto.php",
+        async: false,
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    $("#contenido_ini").html(data);
+
+}
