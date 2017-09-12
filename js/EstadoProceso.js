@@ -111,3 +111,93 @@ function ListEstadoProceso() {
 
     return data;
 }
+
+function InformacionModiEstado(estado) {
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "lib/EstadoProceso/Controlador/EstadoProcesoController.php",
+        async: false,
+        dataType: 'json',
+        data: {
+            opcion: 'InformacionModiEstado',
+            estado: estado
+        },
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    return data;
+
+}
+
+function DialogModEstado(estado) {
+    var data;
+
+    $.ajax({
+        type: "POST",
+        url: 'lib/EstadoProceso/Vista/FormModificarEstado.php',
+        async: false,
+        data: {
+            estado: estado
+        },
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    $("#modi_estados").html(data);
+    $("#modi_estados").dialog({
+        width: '500',
+        height: '500',
+        title: 'Modificar estado',
+        modal: true,
+        buttons: {
+            "Cerrar": function ()
+            {
+                $("#modi_estados").dialog('close');
+                $("#modi_estados").dialog('destroy');
+                $("#modi_estados").html("");
+            }
+        }
+    });
+}
+
+function ModificarEstadoProceso(id_estado_proceso) {
+    var confirma = confirm('Esta seguro de modificar este estado');
+
+    if (confirma) {
+        var data;
+        $.ajax({
+            type: "POST",
+            url: "lib/EstadoProceso/Controlador/EstadoProcesoController.php",
+            async: false,
+            data: {
+                opcion: 'ModificarEstadoProceso',
+                id_estado_proceso: id_estado_proceso,
+                estado_proceso: $("#estado_proceso_m").val(),
+                estado: $("#estado_estado_m").val()
+            },
+            success: function (retu) {
+                data = retu;
+            }
+        });
+
+        if (data == 1) {
+            alert("Se modifico correctamente el estado");
+            $("#modi_estados").dialog('close');
+            $("#modi_estados").dialog('destroy');
+            $("#modi_estados").html("");
+            CargarVistaEstados();
+
+        } else if (data == 2)
+        {
+            alert("Este estado ya existe cambielo");
+        } else
+        {
+            alert("No se logro ingresar el estado, comuniquese con soporte");
+        }
+
+    }
+}

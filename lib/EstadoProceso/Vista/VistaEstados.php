@@ -18,6 +18,7 @@
     </tfoot>
 </table>
 <div id="dialog_n_estado"></div>
+<div id="modi_estados"></div>
 <script>
     var json = GridEstados();
 

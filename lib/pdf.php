@@ -12,6 +12,11 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
 
     $data["id_caso"] = $_REQUEST['caso'];
     $tabla = $obj_caso->TablaInformacionCaso($data);
+    
+    
+//    var_dump($tabla);
+//    die();
+    
     ?>
     <style>
         /* 
@@ -51,12 +56,12 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         <br>
-        <div id="contenido" style="margin-left: 250px; float: left">
+      
             <?php
             echo $tabla;
             ?>
            
-        </div>
+       
         <h5 style="width:200px;  text-align:center; background:#fff">Documento generado automaticamente. <?php echo date('Y-m-d h:i:s'); ?></h5>
         
     </page>

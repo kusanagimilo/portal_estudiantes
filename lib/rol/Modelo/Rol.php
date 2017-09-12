@@ -120,8 +120,8 @@ class Rol {
 
             $arreglo_update = array(":estado" => $data['estado_rol'],
                 ":rol" => $data['rol'],
-                "id_rol" => $data['id_rol'],
-                "id_usr_modifico" => $arreglo_sesion['id_usuario']);
+                ":id_rol" => $data['id_rol'],
+                ":id_usr_modifico" => $arreglo_sesion['id_usuario']);
 
 
             $update = "UPDATE rol

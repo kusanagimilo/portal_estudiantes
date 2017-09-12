@@ -18,20 +18,20 @@ class EstadoProceso {
     public function AlmacenarEstadoProceso($data) {
         date_default_timezone_set('America/Bogota');
 
-//        session_start();
-//        $arreglo_sesion = $_SESSION['Usuario'];
+        session_start();
+        $arreglo_sesion = $_SESSION['Usuario'];
 
-        $arreglo_sesion['id_usuario'] = 1;
+//        $arreglo_sesion['id_usuario'] = 1;
         $obj_conexion = new BD();
         $link = $obj_conexion->Conectar();
-        
-       
+
+
 
         $sql_revisa_existe = "SELECT id_estado_proceso FROM estado_proceso  WHERE estado_proceso = '" . trim(utf8_decode($data['estado'])) . "'";
         $numero_filas = $obj_conexion->NumeroFilas($sql_revisa_existe, $link);
 
 
-      
+
 
 
         if ($numero_filas > 0) {
@@ -41,8 +41,8 @@ class EstadoProceso {
                 ":id_usr_creo" => $arreglo_sesion['id_usuario'],
                 ":fecha_creacion" => date('Y-m-d h:i:s'),
                 ":estado" => 'AC');
-            
-          
+
+
             $sql_insert = "INSERT INTO estado_proceso(
             estado_proceso,id_usr_creo,fecha_creacion,estado)
             VALUES (:estado_proceso,:id_usr_creo,:fecha_creacion,:estado);";
@@ -50,7 +50,7 @@ class EstadoProceso {
             $result = $link->prepare($sql_insert);
             $ejecucion = $result->execute($arreglo_in);
 
-          
+
 
             if ($ejecucion) {
                 return 1;
@@ -79,7 +79,7 @@ class EstadoProceso {
             }
             $arreglo_interior = array(utf8_encode($value['estado_proceso']),
                 $estado,
-                "<input type='button' value='Modificar' onclick='' class='btn btn-default'>");
+                "<input type='button'  value='Modificar' onclick='DialogModEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-default'>");
             array_push($arreglo_retorno, $arreglo_interior);
         }
 
@@ -87,7 +87,7 @@ class EstadoProceso {
 
         return $json;
     }
-    
+
     public function ListaEstados() {
 
         $arreglo_retorno = array();
@@ -106,6 +106,68 @@ class EstadoProceso {
         $json = json_encode($arreglo_retorno);
 
         return $json;
+    }
+
+    public function InformacionModiEstado($data) {
+        $arreglo_retorno = array();
+
+
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+        $sql = "SELECT * FROM estado_proceso WHERE id_estado_proceso = " . $data['estado'] . "";
+        $resul = $obj_conexion->ResultSet($sql, $link);
+
+        $arreglo_retorno['id_estado_proceso'] = $resul[0]['id_estado_proceso'];
+        $arreglo_retorno['estado_proceso'] = $resul[0]['estado_proceso'];
+        $arreglo_retorno['estado'] = $resul[0]['estado'];
+
+        $json = json_encode($arreglo_retorno);
+
+        return $json;
+    }
+    
+     public function ModificarEstadoProceso($data) {
+        session_start();
+        $arreglo_sesion = $_SESSION['Usuario'];
+
+        //$arreglo_sesion['id_usuario'] = 1;
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+
+
+        $sql_revisa_existe = "SELECT id_estado_proceso FROM estado_proceso WHERE estado_proceso = '" . trim($data['estado_proceso']) . "'
+                              AND id_estado_proceso != " . $data['id_estado_proceso'] . "";
+        
+        //RETURN $sql_revisa_existe;
+        
+        $numero_filas = $obj_conexion->NumeroFilas($sql_revisa_existe, $link);
+
+        if ($numero_filas > 0) {
+            return 2;
+        } else {
+
+
+            $arreglo_update = array(":estado" => $data['estado'],
+                ":estado_proceso" => $data['estado_proceso'],
+                ":id_estado_proceso" => $data['id_estado_proceso'],
+                ":id_usr_modifico" => $arreglo_sesion['id_usuario']);
+
+
+            $update = "UPDATE estado_proceso
+                   SET  estado= :estado,
+                   estado_proceso = :estado_proceso,
+                   id_usr_modifico=:id_usr_modifico
+                   WHERE id_rol = :id_estado_proceso";
+
+            $resul = $link->prepare($update);
+            $resul->execute($arreglo_update);
+
+            if ($resul) {
+                return 1;
+            } else {
+                return 3;
+            }
+        }
     }
 
 }

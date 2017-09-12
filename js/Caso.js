@@ -31,8 +31,8 @@ function DialogCrearCaso(id_tipo_proceso) {
 
     $("#dialog_n_caso").html(data);
     $("#dialog_n_caso").dialog({
-        width: '500',
-        height: '500',
+        width: '700',
+        height: '600',
         title: 'Crear Caso',
         modal: true,
         buttons: {

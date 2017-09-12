@@ -224,4 +224,74 @@ AND cam.perm = 'admin'";
           return $sql_insert_1 . " VALUES " . $sql_insert_2; */
     }
 
+    public function AlmacenaCartaPresentacion($data) {
+
+
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+
+        $nombres_alumnos = "";
+        $tipos_documentos_alumnos = "";
+        $numeros_documentos_alumnos = "";
+        $ids_javeriana_alumnos = "";
+        $telefonos_alumnos = "";
+        $correos_alumnos = "";
+
+        for ($index = 0; $index < count($data['nombres_alumnos']); $index++) {
+            $nombres_alumnos .= $data['nombres_alumnos'][$index] . "|";
+            $tipos_documentos_alumnos .= $data['tipos_documentos_alumnos'][$index] . "|";
+            $numeros_documentos_alumnos .= $data['numeros_documentos_alumnos'][$index] . "|";
+            $ids_javeriana_alumnos .= $data['ids_javeriana_alumnos'][$index] . "|";
+            $telefonos_alumnos .= $data['telefonos_alumnos'][$index] . "|";
+            $correos_alumnos .= $data['correos_alumnos'][$index] . "|";
+        }
+
+        $nombres_alumnos = substr($nombres_alumnos, 0, -1);
+        $tipos_documentos_alumnos = substr($tipos_documentos_alumnos, 0, -1);
+        $numeros_documentos_alumnos = substr($numeros_documentos_alumnos, 0, -1);
+        $ids_javeriana_alumnos = substr($ids_javeriana_alumnos, 0, -1);
+        $telefonos_alumnos = substr($telefonos_alumnos, 0, -1);
+        $correos_alumnos = substr($correos_alumnos, 0, -1);
+
+
+        $arreglo_in = array(":nombre" => utf8_decode($nombres_alumnos),
+            ":tipo_documento" => $tipos_documentos_alumnos,
+            ":numero_documento" => $numeros_documentos_alumnos,
+            ":id_javeriana" => $ids_javeriana_alumnos,
+            ":telefono" => $telefonos_alumnos,
+            ":correo_electronico" => $correos_alumnos,
+            ":nombre_responsable_empresa" => $data["nombre_responsable_empresa"],
+            ":cargo_responsable_empresa" => $data["cargo_responsable_empresa"],
+            ":nombre_empresa" => $data["nombre_empresa"],
+            ":nombre_asignatura" => $data["nombre_asignatura"],
+            ":nombre_profesor" => $data["nombre_profesor"]);
+
+
+
+
+        $sql_insert = "INSERT INTO dato(nombre,tipo_documento,numero_documento,id_javeriana,telefono,correo_electronico,
+				 nombre_responsable_empresa,cargo_responsable_empresa,nombre_empresa,nombre_asignatura,nombre_profesor)VALUES(
+				 :nombre,:tipo_documento,:numero_documento,:id_javeriana,:telefono,:correo_electronico,
+				 :nombre_responsable_empresa,:cargo_responsable_empresa,:nombre_empresa,:nombre_asignatura,:nombre_profesor)";
+
+
+        $result = $link->prepare($sql_insert);
+        $ejecucion = $result->execute($arreglo_in);
+
+        if ($ejecucion) {
+            $ultimo_id_caso = $link->lastInsertId();
+
+            $obj_caso = new Caso();
+
+            $data_caso['id_tipo_proceso'] = $data['tipo_proceso'];
+            $data_caso['id_dato'] = $ultimo_id_caso;
+
+            $retorno_caso = $obj_caso->CrearCaso($data_caso);
+
+            return $retorno_caso;
+        } else {
+            return 'mal';
+        }
+    }
+
 }

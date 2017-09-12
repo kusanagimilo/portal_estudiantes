@@ -10,4 +10,7 @@ if ($opcion == 'AlmacenarDatos') {
 }if ($opcion == 'AlmacenarDatosAdmin') {
     $retorno = $obj_forms->AlmacenarFormularioAdmin($_POST);
     echo $retorno;
+}if ($opcion == 'AlmacenaCartaPresentacion') {
+    $retorno = $obj_forms->AlmacenaCartaPresentacion($_POST);
+    echo $retorno;
 }

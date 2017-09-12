@@ -163,6 +163,8 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
 
         $resul_info = $obj_conexion->ResultSet($sql_informacion, $link);
 
+        $tipo_proceso_seleccionado = $resul_info[0]['tipo_proceso'];
+
         $id_dato;
         $sql_ver = "SELECT ";
 
@@ -183,9 +185,11 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
 
         $resul_info2 = $obj_conexion->ResultSet($sql_ver, $link);
 
-        
 
-        $tabla = "<table class='table table-bordered table-striped'>
+        if ($tipo_proceso_seleccionado != "CARTA DE PRESENTACION A EMPRESA") {
+
+            $tabla = "<div id='contenido' style='margin-left: 250px; float: left'>
+                <table class='table table-bordered table-striped'>
                  <thead>
                     <tr>
                         <th colspan='2'><h5><b>" . $resul_info[0]['tipo_proceso'] . "</b></h5></th>
@@ -201,48 +205,139 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
                     <td>" . $resul_info[0]['fecha_creacion'] . "</td>
                  </tr>";
 
-        foreach ($resul_info as $key => $value) {
-            $campo_identi = $value["campo_identi"];
+            foreach ($resul_info as $key => $value) {
+                $campo_identi = $value["campo_identi"];
 
-            $tabla .= "<tr>
+                $tabla .= "<tr>
                         <td>" . $value['nombre_campo'] . "</td>
-                        <td>" . $resul_info2[0][$campo_identi] . "</td>
+                        <td>" . utf8_decode($resul_info2[0][$campo_identi]) . "</td>
                     </tr>";
 
 
 
-            //$tabla.= $value['nombre_campo']." : ".$resul_info2[0][$campo_identi];
-        }
+                //$tabla.= $value['nombre_campo']." : ".$resul_info2[0][$campo_identi];
+            }
 
-        if (@$resul_info2[0]['otro_motivo_excusa'] != NULL || @$resul_info2[0]['otro_motivo_excusa'] != "") {
-            $tabla .= "<tr>
+            if (@$resul_info2[0]['otro_motivo_excusa'] != NULL || @$resul_info2[0]['otro_motivo_excusa'] != "") {
+                $tabla .= "<tr>
                         <td>OTRO</td>
                         <td>" . $resul_info2[0]['otro_motivo_excusa'] . "</td>
                     </tr>";
-        }
+            }
 
-        if (@$resul_info2[0]['situacion_fuerza_mayor'] != NULL || @$resul_info2[0]['situacion_fuerza_mayor'] != "") {
-            $tabla .= "<tr>
+            if (@$resul_info2[0]['situacion_fuerza_mayor'] != NULL || @$resul_info2[0]['situacion_fuerza_mayor'] != "") {
+                $tabla .= "<tr>
                         <td>SITUACION DE FUERZA MAYOR</td>
                         <td>" . $resul_info2[0]['situacion_fuerza_mayor'] . "</td>
                     </tr>";
-        }
+            }
 
-        if (@$resul_info2[0]['nivel_clasificacion'] != NULL || @$resul_info2[0]['nivel_clasificacion'] != "") {
-            $tabla .= "<tr>
+            if (@$resul_info2[0]['nivel_clasificacion'] != NULL || @$resul_info2[0]['nivel_clasificacion'] != "") {
+                $tabla .= "<tr>
                         <td>NIVEL DE CLASIFICACION</td>
                         <td>" . $resul_info2[0]['nivel_clasificacion'] . "</td>
                     </tr>";
-        }
+            }
 
-        if (@$resul_info2[0]['nivel_cursado_aprobado'] != NULL || @$resul_info2[0]['nivel_cursado_aprobado'] != "") {
-            $tabla .= "<tr>
+            if (@$resul_info2[0]['nivel_cursado_aprobado'] != NULL || @$resul_info2[0]['nivel_cursado_aprobado'] != "") {
+                $tabla .= "<tr>
                         <td>NIVELES CURSADOS Y APROBADOS</td>
                         <td>" . $resul_info2[0]['nivel_cursado_aprobado'] . "</td>
                     </tr>";
-        }
+            }
 
-        $tabla .= "</tbody></table>";
+            $tabla .= "</tbody></table></div>";
+        } else {
+
+
+            $nombres_alumnos = explode("|", $resul_info2[0]['nombre']);
+            $tipos_documentos_alumnos = explode("|", $resul_info2[0]['tipo_documento']);
+            $numeros_documentos_alumnos = explode("|", $resul_info2[0]['numero_documento']);
+            $ids_javeriana_alumnos = explode("|", $resul_info2[0]['id_javeriana']);
+            $telefonos_alumnos = explode("|", $resul_info2[0]['telefono']);
+            $correos_alumnos = explode("|", $resul_info2[0]['correo_electronico']);
+
+
+            $tabla = "<div id='contenido' style='margin-left: 50px; float: left'>
+                <table class='table table-bordered table-striped'>
+                 <thead>
+                    <tr>
+                        <th colspan='2'><h5><b>" . $resul_info[0]['tipo_proceso'] . "</b></h5></th>
+                    </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                    <td>IDENTIFICACION CASO</td>
+                    <td>" . $data['id_caso'] . "</td>
+                 </tr>
+                 <tr>
+                    <td>FECHA DE CREACION CASO</td>
+                    <td>" . $resul_info[0]['fecha_creacion'] . "</td>
+                 </tr>
+                 <tr>
+                    <td>NOMBRE RESPONSABLE EN LA EMPRESA</td>
+                    <td>" . $resul_info2[0]['nombre_responsable_empresa'] . "</td>
+                 </tr>
+                 <tr>
+                    <td>CARGO DEL RESPONSABLE EN LA EMPRESA</td>
+                    <td>" . $resul_info2[0]['cargo_responsable_empresa'] . "</td>
+                 </tr>
+                 <tr>
+                    <td>NOMBRE EMPRESA</td>
+                    <td>" . $resul_info2[0]['nombre_empresa'] . "</td>
+                 </tr>
+                 <tr>
+                    <td>NOMBRE PROFESOR</td>
+                    <td>" . $resul_info2[0]['nombre_profesor'] . "</td>
+                 </tr>
+                 <tr>
+                    <td>NOMBRE(S) ASIGNATURA(S)</td>
+                    <td>" . $resul_info2[0]['nombre_asignatura'] . "</td>
+                 </tr>
+                 <tr>
+                    <td colspan='2'>
+                        
+                        <table>
+                        <thead>
+                            <tr>
+                                <th colspan='6'>ALUMNOS ASOCIADOS</th>
+                            </tr>
+                            <tr>
+                                <th>Alumno</th>
+                                <th>Tipo de documento</th>
+                                <th>Numero documento</th>
+                                <th>Id javeriana</th>
+                                <th>Telefono</th>
+                                <th>Correo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                 
+
+                 ";
+
+            for ($index = 0; $index < count($nombres_alumnos); $index++) {
+                $tabla .= "<tr>
+                            <td>" . $nombres_alumnos[$index] . "</td>
+                            <td>" . $tipos_documentos_alumnos[$index] . "</td>
+                            <td>" . $numeros_documentos_alumnos[$index] . "</td>
+                            <td>" . $ids_javeriana_alumnos[$index] . "</td>
+                            <td>" . $telefonos_alumnos[$index] . "</td>
+                            <td>" . $correos_alumnos[$index] . "</td>
+                         </tr>";
+            }
+
+
+            $tabla .= "
+                    </tbody>
+                    </table>
+                 </td>
+                 </tr>
+                 </tbody></table></div>";
+
+           
+        }
 
         return $tabla;
     }
