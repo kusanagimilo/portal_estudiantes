@@ -8,7 +8,6 @@ class EnvioNotificacion {
 
 
         $mail = new PHPMailer;
-        $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
 
         $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
@@ -45,8 +44,8 @@ class EnvioNotificacion {
                             <img alt="Logo javeriana" src="http://www.javeriana.edu.co/ingenieria/gestiondeprocesos/img/logo_puj.png" style="max-width:100%;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px" width="175">
                         </a>
                     </td>
-                    <td style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;text-align:right;vertical-align:middle;font-size:15px;font-weight:600; color:#011E0B">Notificación de cambio de estado<br>
-                        <span style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:10px;text-align:left;vertical-align:middle;font-size:11px;font-weight:400; color:#DF3325"><i>Pontificia Universidad Javeriana</i></span>			
+                    <td style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;text-align:right;vertical-align:middle;font-size:15px;font-weight:600; color:#011E0B">Notificacion de cambio de estado<br>
+                        <span style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:10px;text-align:left;vertical-align:middle;font-size:11px;font-weight:400; color:#DF3325"><i>Universidad javeriana</i></span>			
                     </td>
                 </tr>
                 <tr>
@@ -62,7 +61,7 @@ class EnvioNotificacion {
 
                         <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Caso :  $caso</span>
                         <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Nuevo estado : $estado </span>
-                        <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Fecha de la modifiicación :  $fecha_modificacion</span>
+                        <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Fecha de la modificacion :  $fecha_modificacion</span>
 
 
                     </td>
@@ -72,7 +71,7 @@ class EnvioNotificacion {
 ini;
 
 
-        $mail->Subject = 'Cambio información proceso - SISTEMA GESTIÓN ESTUDIANTES';
+        $mail->Subject = 'Cambio informacion proceso - SISTEMA GESTION ESTUDIANTES';
 
         $mail->msgHTML($mensaje);
 
@@ -93,7 +92,6 @@ ini;
 
 
         $mail = new PHPMailer;
-        $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
 
         $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
@@ -149,8 +147,6 @@ ini;
 
 ini;
 
-
-
         $mail->msgHTML($mensaje);
 
 
@@ -161,11 +157,10 @@ ini;
         }
     }
 
-    function EnviarCorreoCreacionCaso($data, $correo) {
+    function EnviarCorreoCreacionCaso($data, $array_correos) {
 
 
         $mail = new PHPMailer;
-        $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
 
         $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
@@ -180,10 +175,12 @@ ini;
 
         $mail->setFrom('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
         $mail->addReplyTo('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        // foreach ($array_correos as $key => $value) {
 
-        $mail->addAddress($correo, $correo);
-        //}
+
+        foreach ($array_correos as $key => $value) {
+
+            $mail->addAddress($value, $value);
+        }
 
         $caso = $data[0]['id_caso'];
         $tipo_proceso = $data[0]['tipo_proceso'];
@@ -201,8 +198,8 @@ ini;
                     <img alt="Logo javeriana" src="http://www.javeriana.edu.co/ingenieria/gestiondeprocesos/img/logo_puj.png" style="max-width:100%;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:0px" width="175">
                 </a>
             </td>
-            <td style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;text-align:right;vertical-align:middle;font-size:15px;font-weight:600; color:#011E0B">Notificación de creación de caso<br>
-                <span style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:10px;text-align:left;vertical-align:middle;font-size:11px;font-weight:400; color:#DF3325"><i>Pontificia Universidad Javeriana</i></span>			
+            <td style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:5px;padding-bottom:0px;padding-left:0px;text-align:right;vertical-align:middle;font-size:15px;font-weight:600; color:#011E0B">Notificacion de creacion de caso<br>
+                <span style="font-family:'HelveticaNeue','Helvetica',Helvetica,Arial,sans-serif;margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;padding-top:0px;padding-right:0px;padding-bottom:0px;padding-left:10px;text-align:left;vertical-align:middle;font-size:11px;font-weight:400; color:#DF3325"><i>Universidad javeriana</i></span>			
             </td>
         </tr>
         <tr>
@@ -218,8 +215,8 @@ ini;
   
                 <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Caso :  $caso</span>
                 <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Proceso : $tipo_proceso </span>
-                <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Fecha de creación :  $fecha_creacion</span>
-                <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Creado por :  $nombres</span>
+                <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Fecha de creacion :  $fecha_creacion</span>
+                <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Creado por :  $nombres $apellidos</span>
 
                 
             </td>
@@ -230,7 +227,7 @@ ini;
 ini;
 
 
-        $mail->Subject = 'Creación caso - SISTEMA GESTIÓN ESTUDIANTES';
+        $mail->Subject = 'Creacion caso - SISTEMA GESTION ESTUDIANTES';
 
         $mail->msgHTML($mensaje);
 

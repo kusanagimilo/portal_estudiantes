@@ -5,8 +5,8 @@
             <th>No de caso</th>
             <th>Proceso</th>
             <th>Estado</th>
-            <th>Usuario creó caso</th>
-            <th>Fecha ultima modificación</th>
+            <th>Usario creo caso</th>
+            <th>Fecha ultima modificacion</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -15,8 +15,8 @@
             <th><input type="text" placeholder="No de caso"></th>
             <th><input type="text" placeholder="Proceso"></th>
             <th><input type="text" placeholder="Estado"></th>
-            <th><input type="text" placeholder="Usuario creó caso"></th>
-            <th><input type="text" placeholder="Fecha ultima modificación"></th>
+            <th><input type="text" placeholder="Usuario creo caso"></th>
+            <th><input type="text" placeholder="Fecha creacion"></th>
             <th>Acciones</th>
         </tr>
     </tfoot>
@@ -36,10 +36,7 @@
     $(document).ready(function () {
         var table = $('#casos_tot').DataTable({
             data: json,
-            order: [[0, "desc"]],
-            language: {
-                url: "js/espanol.json"
-            }
+            order: [[0, "desc"]]
         });
         table.columns().every(function () {
             var that = this;

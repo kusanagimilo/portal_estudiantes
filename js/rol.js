@@ -265,7 +265,7 @@ function AgregarTipoProcesoRol(rol) {
 
 
 
-    var cod_tipo_proceso = $("#sel_tipo_pro").val();
+    var cod_tipo_proceso ="sjhagdjhsa"
 
     if (cod_tipo_proceso != "") {
         var data;

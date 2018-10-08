@@ -1,12 +1,11 @@
 
-<table id="casos_tot" class="display" cellspacing="0" width="100%">
+<table id="casos_mi" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>No de caso</th>
             <th>Proceso</th>
             <th>Estado</th>
-            <th>Usuario creó caso</th>
-            <th>Fecha ultima modificación</th>
+            <th>Fecha ultima modificacion</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -15,31 +14,25 @@
             <th><input type="text" placeholder="No de caso"></th>
             <th><input type="text" placeholder="Proceso"></th>
             <th><input type="text" placeholder="Estado"></th>
-            <th><input type="text" placeholder="Usuario creó caso"></th>
-            <th><input type="text" placeholder="Fecha ultima modificación"></th>
+            <th><input type="text" placeholder="Fecha creacion"></th>
             <th>Acciones</th>
         </tr>
     </tfoot>
 </table>
 <div id="dialog_tab_caso"></div>
 <div id="mostrar_adjuntos"></div>
-<div id="diag_cam_caso"></div>
-<div id="dialog_tab_caso_admin"></div>
 <script>
-    var json = GridCasos();
+    var json = VerCasosUsuario();
 
-    //  console.log(json);
+    //console.log(json);
 
 
 
 
     $(document).ready(function () {
-        var table = $('#casos_tot').DataTable({
+        var table = $('#casos_mi').DataTable({
             data: json,
-            order: [[0, "desc"]],
-            language: {
-                url: "js/espanol.json"
-            }
+            order: [[0, "desc"]]
         });
         table.columns().every(function () {
             var that = this;

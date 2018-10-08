@@ -25,7 +25,7 @@ foreach ($arreglo_caosos as $key => $value) {
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse_<?php echo $value['id_tipo_proceso']; ?>">Click aquí para ver documentos asociados</a>
+                                <b><a style="color:blue;" data-toggle="collapse" href="#collapse_<?php echo $value['id_tipo_proceso']; ?>">Click aqui para ver documentos asociados</a></b>
                             </h4>
                         </div>
                         <div id="collapse_<?php echo $value['id_tipo_proceso']; ?>" class="panel-collapse collapse" >

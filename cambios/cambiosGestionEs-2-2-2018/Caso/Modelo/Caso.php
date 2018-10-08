@@ -82,17 +82,17 @@ where tipd.id_tipo_proceso = '" . $id_tipo_proceso . "'";
         if ($ejecucion_caso) {
 
 
-//            $arreglo_correos = array();
-//
-//            $sql_usr_admins = "SELECT us.correo
-//                               FROM usuario_rol usr
-//                               INNER JOIN usuario us ON us.id_usuario = usr.id_usuario
-//                               WHERE usr.id_rol = 8";
-//            $resul_admins = $obj_conexion->ResultSet($sql_usr_admins, $link);
-//
-//            foreach ($resul_admins as $key => $value) {
-//                array_push($arreglo_correos, $value['correo']);
-//            }
+            $arreglo_correos = array();
+
+            $sql_usr_admins = "SELECT us.correo
+                               FROM usuario_rol usr
+                               INNER JOIN usuario us ON us.id_usuario = usr.id_usuario
+                               WHERE usr.id_rol = 8";
+            $resul_admins = $obj_conexion->ResultSet($sql_usr_admins, $link);
+
+            foreach ($resul_admins as $key => $value) {
+                array_push($arreglo_correos, $value['correo']);
+            }
 
             $sql_data_ca = "SELECT cas.id_caso,tp.tipo_proceso,cas.fecha_creacion,us.nombres,us.apellidos
 FROM caso cas
@@ -103,7 +103,7 @@ WHERE id_caso =  " . $id_caso . "";
 
             $data_noti = array_unique($resul_data_ca);
 
-            $rta_not = $obj_notificacion->EnviarCorreoCreacionCaso($data_noti, 'carrera.ing.ind@javeriana.edu.co');
+            $rta_not = $obj_notificacion->EnviarCorreoCreacionCaso($data_noti, $arreglo_correos);
 
 
             if ($rta_not == 1) {
@@ -163,7 +163,7 @@ WHERE id_caso =  " . $id_caso . "";
             $arreglo_interior = array($value['id_caso'],
                 utf8_encode($value['tipo_proceso']),
                 utf8_encode($value['estado_proceso']),
-                utf8_encode($value['nombres']),
+                utf8_encode($value['nombres'] . " " . $value['apellidos']),
                 utf8_encode($value['fecha_modificacion']),
                 $botones);
             array_push($arreglo_retorno, $arreglo_interior);
@@ -446,19 +446,17 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
 
             $arreglo_correos = array();
 
-//            $sql_usr_admins = "SELECT us.correo
-//                               FROM usuario_rol usr
-//                               INNER JOIN usuario us ON us.id_usuario = usr.id_usuario
-//                               WHERE usr.id_rol = 8";
-//            $resul_admins = $obj_conexion->ResultSet($sql_usr_admins, $link);
-//
-//            foreach ($resul_admins as $key => $value) {
-//                array_push($arreglo_correos, $value['correo']);
-//            }
+            $sql_usr_admins = "SELECT us.correo
+                               FROM usuario_rol usr
+                               INNER JOIN usuario us ON us.id_usuario = usr.id_usuario
+                               WHERE usr.id_rol = 8";
+            $resul_admins = $obj_conexion->ResultSet($sql_usr_admins, $link);
+
+            foreach ($resul_admins as $key => $value) {
+                array_push($arreglo_correos, $value['correo']);
+            }
 
 
-            array_push($arreglo_correos, 'carrera.ing.ind@javeriana.edu.co');
-            
             $sql_correo_creador_caso = "SELECT us.correo
                                         FROM caso cas
                                         INNER JOIN usuario us ON us.id_usuario = cas.id_usuario_creo

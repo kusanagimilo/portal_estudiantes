@@ -12,7 +12,7 @@
             <th>Correo</th>
             <th>Directorio activo</th>
             <th>Estado</th>
-            <th>Acción</th>
+            <th>Accion</th>
         </tr>
     </thead>
     <tfoot>
@@ -22,7 +22,7 @@
             <th>Correo</th>
             <th>Directorio activo</th>
             <th>Estado</th>
-            <th>Acción</th>
+            <th>Accion</th>
         </tr>
     </tfoot>
 </table>
@@ -37,10 +37,7 @@
 
     $(document).ready(function () {
         $('#usuarios_t').DataTable({
-            data: json,
-            language: {
-                url: "js/espanol.json"
-            }
+            data: json
         });
     });
 </script>
