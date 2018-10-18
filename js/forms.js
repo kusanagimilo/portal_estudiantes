@@ -5,41 +5,50 @@
  */
 function AlmacenarForm()
 {
-    var data_r;
-    $.ajax({
-        type: "POST",
-        url: "lib/Forms/Controlador/FormsController.php",
-        async: false,
-        data: $("#frm_forms").serialize(),
-        success: function (retu) {
-            data_r = retu;
-        }
-    });
-    //console.log(data_r);
-    //return false;
 
-    if (data_r != 'mal') {
+    var confirma = confirm("Esta seguro de almacenar esta informacion");
 
-        if ($("#archivo").val() == "" || $("#archivo").val() == null) {
-            alert("Se ingreso correctamente la informacion");
-            $("#dialog_n_caso").dialog('close');
-            $("#dialog_n_caso").dialog('destroy');
-            $("#dialog_n_caso").html("");
-        } else {
+    if (confirma) {
 
-            var retorno_ar = AlmacenarArchivoCaso(data_r);
-            if (retorno_ar == 1) {
+        $("#btn_almacenar_caso").remove();
+        $("#contenedor_cargando").html("<center>ALMACENANDO EL CASO ESPERE POR FAVOR ...</center>");
 
+        var data_r;
+        $.ajax({
+            type: "POST",
+            url: "lib/Forms/Controlador/FormsController.php",
+            async: false,
+            data: $("#frm_forms").serialize(),
+            success: function (retu) {
+                data_r = retu;
+            }
+        });
+        //console.log(data_r);
+        //return false;
+
+        if (data_r != 'mal') {
+
+            if ($("#archivo").val() == "" || $("#archivo").val() == null) {
                 alert("Se ingreso correctamente la informacion");
                 $("#dialog_n_caso").dialog('close');
                 $("#dialog_n_caso").dialog('destroy');
                 $("#dialog_n_caso").html("");
             } else {
-                alert("No se ingreso la informacion");
+
+                var retorno_ar = AlmacenarArchivoCaso(data_r);
+                if (retorno_ar == 1) {
+
+                    alert("Se ingreso correctamente la informacion");
+                    $("#dialog_n_caso").dialog('close');
+                    $("#dialog_n_caso").dialog('destroy');
+                    $("#dialog_n_caso").html("");
+                } else {
+                    alert("No se ingreso la informacion");
+                }
             }
+        } else {
+            alert("No se ingreso la informacion");
         }
-    } else {
-        alert("No se ingreso la informacion");
     }
 
 }

@@ -103,9 +103,9 @@ WHERE id_caso =  " . $id_caso . "";
 
             $data_noti = array_unique($resul_data_ca);
 
-            $rta_not = $obj_notificacion->EnviarCorreoCreacionCaso($data_noti, 'carrera.ing.ind@javeriana.edu.co');
+            //  $rta_not = $obj_notificacion->EnviarCorreoCreacionCaso($data_noti, 'carrera.ing.ind@javeriana.edu.co');
 
-
+            $rta_not = 1;
             if ($rta_not == 1) {
                 return $id_caso;
             } else {
@@ -458,7 +458,7 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
 
 
             array_push($arreglo_correos, 'carrera.ing.ind@javeriana.edu.co');
-            
+
             $sql_correo_creador_caso = "SELECT us.correo
                                         FROM caso cas
                                         INNER JOIN usuario us ON us.id_usuario = cas.id_usuario_creo
