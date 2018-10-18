@@ -201,3 +201,36 @@ function ModificarEstadoProceso(id_estado_proceso) {
 
     }
 }
+
+function EliminarEstado(id_estado_proceso) {
+    var confirma = confirm('Esta seguro de eliminar este estado');
+
+    if (confirma) {
+
+        var data;
+        $.ajax({
+            type: "POST",
+            url: "lib/EstadoProceso/Controlador/EstadoProcesoController.php",
+            async: false,
+            data: {
+                opcion: 'EliminarEstado',
+                id_estado_proceso: id_estado_proceso
+
+            },
+            success: function (retu) {
+                data = retu;
+            }
+        });
+
+        if (data == 1) {
+            alert("Se elimino correctamente el estado");
+            CargarVistaEstados();
+
+        } else
+        {
+            alert("No se logro eliminar el estado, comuniquese con soporte");
+        }
+
+
+    }
+}

@@ -66,7 +66,7 @@ class EstadoProceso {
 
         $obj_conexion = new BD();
         $link = $obj_conexion->Conectar();
-        $sql = "SELECT id_estado_proceso,estado_proceso,estado FROM estado_proceso";
+        $sql = "SELECT id_estado_proceso,estado_proceso,estado FROM estado_proceso WHERE estado != 'EL'";
 
 
         $resul = $obj_conexion->ResultSet($sql, $link);
@@ -79,7 +79,8 @@ class EstadoProceso {
             }
             $arreglo_interior = array(utf8_encode($value['estado_proceso']),
                 $estado,
-                "<input type='button'  value='Modificar' onclick='DialogModEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-default'>");
+                "<input type='button'  value='Modificar' onclick='DialogModEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-default'>
+                 <input type='button' value='Eliminar' onclick='EliminarEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-danger'>");
             array_push($arreglo_retorno, $arreglo_interior);
         }
 
@@ -93,7 +94,7 @@ class EstadoProceso {
         $arreglo_retorno = array();
         $obj_conexion = new BD();
         $link = $obj_conexion->Conectar();
-        $sql = "SELECT id_estado_proceso,estado_proceso FROM estado_proceso WHERE id_estado_proceso != 0";
+        $sql = "SELECT id_estado_proceso,estado_proceso FROM estado_proceso WHERE id_estado_proceso != 0 AND estado = 'AC'";
         $resul = $obj_conexion->ResultSet($sql, $link);
 
         $i = 0;
@@ -125,8 +126,8 @@ class EstadoProceso {
 
         return $json;
     }
-    
-     public function ModificarEstadoProceso($data) {
+
+    public function ModificarEstadoProceso($data) {
         session_start();
         $arreglo_sesion = $_SESSION['Usuario'];
 
@@ -137,9 +138,9 @@ class EstadoProceso {
 
         $sql_revisa_existe = "SELECT id_estado_proceso FROM estado_proceso WHERE estado_proceso = '" . trim($data['estado_proceso']) . "'
                               AND id_estado_proceso != " . $data['id_estado_proceso'] . "";
-        
+
         //RETURN $sql_revisa_existe;
-        
+
         $numero_filas = $obj_conexion->NumeroFilas($sql_revisa_existe, $link);
 
         if ($numero_filas > 0) {
@@ -167,6 +168,36 @@ class EstadoProceso {
             } else {
                 return 3;
             }
+        }
+    }
+
+    public function EliminarEstado($data) {
+        session_start();
+        $arreglo_sesion = $_SESSION['Usuario'];
+
+        //$arreglo_sesion['id_usuario'] = 1;
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+
+
+
+        $arreglo_update = array(":estado" => 'EL',
+            ":id_estado_proceso" => $data['id_estado_proceso'],
+            ":id_usr_modifico" => $arreglo_sesion['id_usuario']);
+
+
+        $update = "UPDATE estado_proceso
+                   SET  estado= :estado,
+                   id_usr_modifico=:id_usr_modifico
+                   WHERE id_estado_proceso = :id_estado_proceso";
+
+        $resul = $link->prepare($update);
+        $resul->execute($arreglo_update);
+
+        if ($resul) {
+            return 1;
+        } else {
+            return 3;
         }
     }
 

@@ -25,4 +25,7 @@ if ($opcion == 'GridEstados') {
 }if ($opcion == 'ModificarEstadoProceso') {
     $retorno = $obj_estado->ModificarEstadoProceso($_POST);
     echo $retorno;
+}if ($opcion == 'EliminarEstado') {
+    $retorno = $obj_estado->EliminarEstado($_POST);
+    echo $retorno;
 }
