@@ -141,6 +141,8 @@ WHERE id_caso =  " . $id_caso . "";
 
             if ($value['tipo_proceso'] == 'RETIRO TEMPORAL') {
                 $soporte = "<a href='lib/RetiroTemporal.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i>RETIRO TEMPORAL</a>";
+            } else if ($value['tipo_proceso'] == 'RETIRO DEFINITIVO') {
+                $soporte = "<a href='lib/RetiroDefinitivo.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i>RETIRO DEFINITIVO</a>";
             } else {
                 $soporte = "<a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
             }
@@ -674,6 +676,7 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
         $resul_info = $obj_conexion->ResultSet($sql_informacion, $link);
 
         $tipo_proceso_seleccionado = $resul_info[0]['tipo_proceso'];
+        $fecha_caso = $resul_info[0]['fecha_creacion'];
 
         $id_dato;
         $sql_ver = "SELECT ";
@@ -694,6 +697,7 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
 
 
         $resul_info2 = $obj_conexion->ResultSet($sql_ver, $link);
+        array_push($resul_info2, $fecha_caso);
 
         return $resul_info2;
     }

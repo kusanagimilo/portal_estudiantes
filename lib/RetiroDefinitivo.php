@@ -12,8 +12,6 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
     $data["id_caso"] = $_REQUEST['caso'];
     $tabla = $obj_caso->InformacionRetiros($data);
     $fecha_caso = $tabla[1];
-   
-
     // InformacionRetiros
     ?>
     <style>
@@ -43,7 +41,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <img  src="../img/logo_uj.png" img style="margin-left: 290px; width: 248px; height: 83px;" ><br>
         <div style="margin-left: 270px;"><h4>PONTIFICIA UNIVERSIDAD JAVERIANA</h4></div>
         <div style="margin-left: 310px; margin-top: -31px;"><h4>FACULTAD DE INGENIERIA</h4></div>
-        <div style="margin-left: 282px; margin-top: -31px;"><h4> SOLICITUD DE RETIRO TEMPORAL</h4></div>
+        <div style="margin-left: 282px; margin-top: -31px;"><h4> SOLICITUD DE RETIRO DEFINITIVO</h4></div>
 
         <div style="margin-top: 30px; font-size: 14px;">
             <table>
@@ -52,7 +50,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                         Fecha de solicitud:
                     </td>
                     <td>
-                        <?php echo $fecha_caso;?>
+                        <?php echo $fecha_caso; ?>
                     </td>
                     <td td style="font-weight: bold">
                         Programa academico:
@@ -112,23 +110,13 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                 </tr>
                 <tr>
                     <td style="font-weight: bold">
-                        Solicita reserva<br> de programa a <br>partir del periodo:
+                        Periodo de retiro:
                     </td>
                     <td>
                         <?php echo $tabla[0]['periodo_retiro']; ?>
                     </td>
-                    <td style="font-weight: bold">Del año</td>
+                    <td style="font-weight: bold">Año de retiro:</td>
                     <td> <?php echo $tabla[0]['anio_retiro']; ?></td>
-                </tr>
-                <tr>
-                    <td style="font-weight: bold">
-                        Para reingresar <br>en el per&iacute;odo
-                    </td>
-                    <td>
-                        <?php echo $tabla[0]['periodo_ingreso']; ?>
-                    </td>
-                    <td style="font-weight: bold">Del año</td>
-                    <td><?php echo $tabla[0]['anio_ingreso']; ?></td>
                 </tr>
             </table>
             <table>
