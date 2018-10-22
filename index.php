@@ -7,7 +7,7 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Portal_estudiantes</title>
+        <title>Portal_estudiantes JAVERIANA</title>
         <link rel="stylesheet" href="css/bootstrap-3.3.7/css/bootstrap.css" type="text/css">
         <link rel="stylesheet" href="css/ini.css" type="text/css">
 
