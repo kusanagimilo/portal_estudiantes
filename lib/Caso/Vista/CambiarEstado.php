@@ -27,7 +27,7 @@ $id_caso = $_POST['id_caso'];
 <div class="panel panel-default">
 
     <div class="panel-heading">
-        <h3 class="panel-title">Nuevo caso</h3>
+        <h3 class="panel-title">Cambiar estado caso</h3>
     </div>
 
     <div class="panel-body" >
@@ -35,7 +35,7 @@ $id_caso = $_POST['id_caso'];
             <table class="table table-bordered table-striped">
 
                 <tr>
-                    <td>Nombre del proceso</td>
+                    <td>Nuevo estado para el caso</td>
                     <td>
                         <select id="estado_proceso_l" name="estado_proceso_l">
                             <option value="">-seleccione-</option>

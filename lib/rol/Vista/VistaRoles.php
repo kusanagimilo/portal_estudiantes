@@ -31,7 +31,10 @@
 
     $(document).ready(function () {
         $('#roles').DataTable({
-            data: json
+            data: json,
+            language: {
+                url: "js/espanol.json"
+            }
         });
     });
 </script>

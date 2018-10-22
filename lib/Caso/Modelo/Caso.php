@@ -137,23 +137,29 @@ WHERE id_caso =  " . $id_caso . "";
 
             $botones = "";
             $estado = '"' . utf8_encode($value['estado_proceso']) . '"';
+            $soporte = "";
+
+            if ($value['tipo_proceso'] == 'RETIRO TEMPORAL') {
+                $soporte = "<a href='lib/RetiroTemporal.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i>RETIRO TEMPORAL</a>";
+            } else {
+                $soporte = "<a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
+            }
+
+
             if ($value['estado_proceso'] == 'SOLICITUD FINALIZADA') {
                 $botones = "<input type='button' value='Ver informacion caso' onclick='DialogTablaInformacionCaso(" . $value['id_caso'] . ")' class='btn btn-default'><br>
-                            <input type='button' value='Ver archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>
-                            <a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
+                            <input type='button' value='Ver archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>" . $soporte;
             } else {
                 if ($arreglo_sesion['rol'] == 'Estudiante') {
                     $botones = "<input type='button' value='Ver informacion caso' onclick='DialogTablaInformacionCaso(" . $value['id_caso'] . ")' class='btn btn-default'><br>
                             <input type='button' value='Ver archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>
-                            <input type='button' value='Cambiar estado' onclick='DialogCambiarEstado(" . $value['id_caso'] . ")' class='btn btn-default'><br>
-                            <a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
+                            <input type='button' value='Cambiar estado' onclick='DialogCambiarEstado(" . $value['id_caso'] . ")' class='btn btn-default'><br>" . $soporte;
                 } else {
 
                     $botones = " <input type='button' value='Completar info admin' onclick='InfoAdmin(" . $value['id_tipo_proceso'] . "," . $value['id_caso'] . "," . $value['id_dato'] . ")' class='btn btn-info'><br>
                             <input type='button' value='Ver informacion caso' onclick='DialogTablaInformacionCaso(" . $value['id_caso'] . ")' class='btn btn-default'><br>
                             <input type='button' value='Ver archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>
-                            <input type='button' value='Cambiar estado' onclick='DialogCambiarEstado(" . $value['id_caso'] . ")' class='btn btn-default'><br>
-                            <a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
+                            <input type='button' value='Cambiar estado' onclick='DialogCambiarEstado(" . $value['id_caso'] . ")' class='btn btn-default'><br>" . $soporte;
                     //$botones = "<input type='button' value='Ver y adjuntar archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>
                     //<input type='button' value='Cambiar estado' onclick='DialogCambiarEstado(" . $value['id_caso'] . ")' class='btn btn-default'>";
                 }
@@ -649,6 +655,47 @@ AND cam.perm != 'admin'";
         $tabla .= "</tbody></table>";
 
         return $tabla;
+    }
+
+    public function InformacionRetiros($data) {
+
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+
+        $sql_informacion = "SELECT cam.id_campo,cam.nombre_campo,cam.campo_identi,cas.id_caso,cas.id_dato,tipp.tipo_proceso,cas.fecha_creacion
+FROM caso cas
+INNER JOIN tipo_proceso tipp ON cas.id_tipo_proceso = tipp.id_tipo_proceso
+INNER JOIN tipo_proceso_campo tipc ON tipc.id_tipo_proceso = tipp.id_tipo_proceso
+INNER JOIN campos cam ON cam.id_campo = tipc.id_campo
+WHERE cas.id_caso = '" . $data['id_caso'] . "'";
+
+
+
+        $resul_info = $obj_conexion->ResultSet($sql_informacion, $link);
+
+        $tipo_proceso_seleccionado = $resul_info[0]['tipo_proceso'];
+
+        $id_dato;
+        $sql_ver = "SELECT ";
+
+        foreach ($resul_info as $key => $value) {
+
+            if ($value['campo_identi'] == 'motivo_inasistencia') {
+                $sql_ver .= "otro_motivo_excusa,situacion_fuerza_mayor,";
+            } else if ($value['campo_identi'] == 'medio_cumplio_requisito') {
+                $sql_ver .= "nivel_clasificacion,nivel_cursado_aprobado,";
+            }
+
+            $sql_ver .= $value['campo_identi'] . ",";
+            $id_dato = $value['id_dato'];
+        }
+        $sql_ver = substr($sql_ver, 0, -1);
+        $sql_ver .= " FROM dato WHERE id_dato = '" . $id_dato . "'";
+
+
+        $resul_info2 = $obj_conexion->ResultSet($sql_ver, $link);
+
+        return $resul_info2;
     }
 
 }
