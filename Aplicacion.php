@@ -37,6 +37,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
             <script src="js/forms.js"></script>
             <script src="js/reportes.js"></script>
             <script src="js/Noticia.js"></script>
+            <script src="js/RazonEstado.js"></script>
             <script src="js/jquery_validate.js"></script>
             <script src="js/jquery.multi-select.js"></script>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

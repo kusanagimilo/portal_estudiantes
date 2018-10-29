@@ -79,7 +79,8 @@ class EstadoProceso {
             }
             $arreglo_interior = array(utf8_encode($value['estado_proceso']),
                 $estado,
-                "<input type='button'  value='Modificar' onclick='DialogModEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-default'>
+                "<input type='button'  value='Razones por estado' onclick='DialogRazonEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-primary'>
+                <input type='button'  value='Modificar' onclick='DialogModEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-default'>
                  <input type='button' value='Eliminar' onclick='EliminarEstado(" . $value['id_estado_proceso'] . ")' class='btn btn-danger'>");
             array_push($arreglo_retorno, $arreglo_interior);
         }

@@ -178,11 +178,11 @@ class Rol {
         $obj_conexion = new BD();
         $link = $obj_conexion->Conectar();
 
-        $sql_revisa_existe = "SELECT id_rol_tipo_proceso FROM rol_tipo_proceso WHERE id_tipo_proceso = " . $data['tipo_proceso'] . " AND id_rol = " . $data['id_rol'] . "";
+        $sql_revisa_existe = "SELECT id_rol_tipo_proceso FROM rol_tipo_proceso WHERE id_tipo_proceso = " . $data['tipo_proceso'] . " AND id_rol = " . $data['id_rol'] . "";    
         $numero_filas = $obj_conexion->NumeroFilas($sql_revisa_existe, $link);
 
 
-
+        
         if ($numero_filas > 0) {
             return 2;
         } else {

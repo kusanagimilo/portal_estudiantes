@@ -19,6 +19,7 @@
 </table>
 <div id="dialog_n_estado"></div>
 <div id="modi_estados"></div>
+<div id="dialog_razon_estado"></div>
 <script>
     var json = GridEstados();
 

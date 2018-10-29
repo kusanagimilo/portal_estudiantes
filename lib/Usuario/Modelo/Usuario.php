@@ -161,7 +161,7 @@ class Usuario {
 
 
                 $arreglo_guarda['nombre_usuario'] = $arreglo_LDAP['nombre_usuario'];
-                $arreglo_guarda['nombres'] = $arreglo_LDAP['nombre_completo'];
+                $arreglo_guarda['nombres'] = $arreglo_LDAP['nombres'];
                 $arreglo_guarda['apellidos'] = $arreglo_LDAP['apellidos'];
                 $arreglo_guarda['correo'] = $arreglo_LDAP['correo'];
 
