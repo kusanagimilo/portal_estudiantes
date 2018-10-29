@@ -1,14 +1,15 @@
-<?php 
+<?php
 $id_caso = $_POST['id_caso'];
 ?>
 <script>
     $('#form_cambiar_estado').validate({
         rules: {
-            estado_proceso_l: {required: true}
-
+            estado_proceso_l: {required: true},
+            razon_estado: {required: true}
         },
         messages: {
-            estado_proceso_l: {required: 'seleccione un estado'}
+            estado_proceso_l: {required: 'seleccione un estado'},
+            razon_estado: {required: 'seleccione la razon'}
 
         },
         debug: true,
@@ -18,7 +19,7 @@ $id_caso = $_POST['id_caso'];
             return false;
         },
         submitHandler: function (form) {
-           CambiarEstado(<?php echo $id_caso;?>);
+            CambiarEstado(<?php echo $id_caso; ?>);
         }
     });
 </script>
@@ -37,14 +38,22 @@ $id_caso = $_POST['id_caso'];
                 <tr>
                     <td>Nuevo estado para el caso</td>
                     <td>
-                        <select id="estado_proceso_l" name="estado_proceso_l">
+                        <select id="estado_proceso_l" name="estado_proceso_l" onchange="ListRazonEstado('estado_proceso_l', 'razon_estado')">
                             <option value="">-seleccione-</option>
                         </select>
                     </td>
                 </tr>
-               
+                <tr>
+                    <td>Razon estado</td>
+                    <td>
+                        <select id="razon_estado" style="width: 200px;" name="razon_estado" >
+                            <option value="">-seleccione-</option>
+                        </select>
+                    </td>
+                </tr>
 
-                <td colspan="2"><center>
+                <tr>
+                    <td colspan="2"><center>
 
                     <button id="btoGuardarUsuario" name="btoGuardarUsuario" class="btn btn-success" type="submit" >Guardar</button>
                 </center></td>
@@ -59,11 +68,17 @@ $id_caso = $_POST['id_caso'];
 
 <script>
     var retornojson = ListEstadoProceso();
-    
+
     $.each(retornojson, function (key, data) {
         //console.log(data.id_tipo_proceso);
         $("#estado_proceso_l").append("<option value='" + data.id_estado_proceso + "'>" + data.estado_proceso + "</option>");
     });
+
+    var estado_razon = EstadoRazon(<?php echo $id_caso; ?>);
+
+    $("#estado_proceso_l").val(estado_razon.id_estado);
+    ListRazonEstado('estado_proceso_l', 'razon_estado');
+    $("#razon_estado").val(estado_razon.id_razon);
 
 </script>
 

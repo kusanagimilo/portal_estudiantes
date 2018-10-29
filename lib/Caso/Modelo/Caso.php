@@ -443,10 +443,16 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
         $arreglo_up = array(":id_estado" => $data['id_estado'],
             ":id_usuario_modifico" => $arreglo_sesion['id_usuario'],
             ":id_caso" => $data['id_caso'],
+            ":id_razon_estado" => $data['razon_estado'],
             ":fecha_modificacion" => date('Y-m-d H:i:s'));
 
 
-        $sql_update = "UPDATE caso SET id_estado = :id_estado,id_usuario_modifico = :id_usuario_modifico,fecha_modificacion=:fecha_modificacion WHERE id_caso = :id_caso ";
+        $sql_update = "UPDATE caso SET
+                       id_estado = :id_estado,
+                       id_usuario_modifico = :id_usuario_modifico,
+                       fecha_modificacion=:fecha_modificacion,
+                       id_razon_estado=:id_razon_estado
+                       WHERE id_caso = :id_caso ";
         $result = $link->prepare($sql_update);
         $ejecucion = $result->execute($arreglo_up);
 
@@ -482,10 +488,10 @@ WHERE cas.id_caso = " . $data['id_caso'] . "";
 
             $data_noti = array_unique($resul_data_ca);
 
-            $rta_not = $obj_notificacion->EnviarCorreoCambioEstado($data_noti, $arreglo_correos);
+            //$rta_not = $obj_notificacion->EnviarCorreoCambioEstado($data_noti, $arreglo_correos);
 //            return var_dump($rta_not); 
-            return $rta_not;
-            //return 1;
+            //return $rta_not;
+            return 1;
         } else {
             return 2;
         }
@@ -700,6 +706,21 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
         array_push($resul_info2, $fecha_caso);
 
         return $resul_info2;
+    }
+
+    public function EstadoRazon($data) {
+        $arreglo_retorno = array();
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+        $sql = "SELECT id_estado,id_razon_estado FROM caso WHERE id_caso = " . $data['caso'] . " ";
+        $resul = $obj_conexion->ResultSet($sql, $link);
+
+        $arreglo_retorno['id_estado'] = $resul[0]['id_estado'];
+        $arreglo_retorno['id_razon'] = $resul[0]['id_razon_estado'];
+
+        $json = json_encode($arreglo_retorno);
+
+        return $json;
     }
 
 }

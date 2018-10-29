@@ -16,4 +16,7 @@ if ($opcion == 'AlmacenarRazonEstado') {
 }if ($opcion == 'RazonesPorEstado') {
     $retorno = $obj_razon_estado->RazonesPorEstado($_POST);
     echo $retorno;
+}if ($opcion == 'ListRazonEstado') {
+    $retorno = $obj_razon_estado->ListRazonEstado($_POST);
+    echo $retorno;
 }

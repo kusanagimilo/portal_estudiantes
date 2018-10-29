@@ -209,6 +209,7 @@ function CambiarEstado(id_caso) {
         data: {
             id_caso: id_caso,
             id_estado: $("#estado_proceso_l").val(),
+            razon_estado: $("#razon_estado").val(),
             opcion: 'CambiarEstado'
         },
         success: function (retu) {
@@ -387,4 +388,26 @@ function TablaCasoAdmin(id_caso) {
     });
 
     return data_r;
+}
+
+
+function EstadoRazon(caso) {
+
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "lib/Caso/Controlador/CasoController.php",
+        async: false,
+        dataType: 'json',
+        data: {
+            opcion: 'EstadoRazon',
+            caso: caso
+        },
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    return data;
+
 }

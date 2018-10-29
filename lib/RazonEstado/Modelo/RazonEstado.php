@@ -68,7 +68,7 @@ class RazonEstado {
                 FROM razon_estado
                 WHERE id_estado_proceso = " . $data['estado_proceso'] . "
                 AND estado = 'AC'";
-        
+
 
         $resul = $obj_conexion->ResultSet($sql, $link);
 
@@ -77,6 +77,25 @@ class RazonEstado {
         foreach ($resul as $key => $value) {
             $arreglo_retorno[$i]['id_razon_estado'] = $value['id_razon_estado'];
             $arreglo_retorno[$i]['id_estado_proceso'] = $value['id_estado_proceso'];
+            $arreglo_retorno[$i]['razon'] = utf8_encode($value['razon']);
+            $i++;
+        }
+
+        $json = json_encode($arreglo_retorno);
+
+        return $json;
+    }
+
+    public function ListRazonEstado($data) {
+        $arreglo_retorno = array();
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+        $sql = "SELECT id_razon_estado,razon FROM razon_estado WHERE id_estado_proceso = " . $data['estado_proceso'] . "  AND estado = 'AC' ";
+        $resul = $obj_conexion->ResultSet($sql, $link);
+
+        $i = 0;
+        foreach ($resul as $key => $value) {
+            $arreglo_retorno[$i]['id_razon_estado'] = $value['id_razon_estado'];
             $arreglo_retorno[$i]['razon'] = utf8_encode($value['razon']);
             $i++;
         }

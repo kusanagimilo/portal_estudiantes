@@ -33,4 +33,7 @@ if ($opcion == 'InformacionRetiros') {
     $retorno = $obj_caso->InformacionRetiros($_POST);
     echo $retorno;
 }
-
+if ($opcion == 'EstadoRazon') {
+    $retorno = $obj_caso->EstadoRazon($_POST);
+    echo $retorno;
+}

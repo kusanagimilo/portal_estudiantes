@@ -89,3 +89,32 @@ function RazonesPorEstado(estado_proceso) {
     $("#razones_estados_add").html(html);
 }
 
+function ListRazonEstado(input_estado_proceso, input_razon_estado) {
+
+    $("#input_razon_estado").html("");
+
+    var estado_proceso = $("#" + input_estado_proceso + "").val();
+
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "lib/RazonEstado/Controlador/RazonEstadoController.php",
+        async: false,
+        dataType: 'json',
+        data: {
+            opcion: 'ListRazonEstado',
+            estado_proceso: estado_proceso
+        },
+        success: function (retu) {
+            data = retu;
+        }
+    });
+    var html = "<option value=''>--seleccione--</option>";
+    $.each(data, function (key, data2) {
+        html += "<option value='" + data2.id_razon_estado + "'>" + data2.razon + "</option>";
+
+    });
+    $("#" + input_razon_estado + "").html(html);
+
+
+}
