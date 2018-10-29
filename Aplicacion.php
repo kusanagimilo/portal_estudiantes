@@ -43,6 +43,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script src="ckeditor/ckeditor.js"></script>
             <script src="js/jquery_validate.js"></script>
+            <script src="js/ini.js"></script>
 
         </head>
         <body>
@@ -57,7 +58,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#"><img src="img/logo_puj.png" width="40%" ></a>
+                        <a class="navbar-brand" href="Aplicacion.php"><img src="img/logo_puj.png" width="40%" ></a>
                         <br>
                         <br>
                         <br>
@@ -111,6 +112,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
 
             <script>
                 MenuUsuario();
+                VerNoticiasIni();
             </script>
 
         </body>

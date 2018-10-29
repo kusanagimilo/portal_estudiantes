@@ -11,7 +11,11 @@ if ($noticia != null || $noticia != "") {
     //var_dump($arreglo_noticia);
     ?>
 
+    <input type="button" class="btn btn-lg btn-info" value="Regresar" onclick="VerNoticiasIni()">
+    <br>
+    <br>
     <div class="panel panel-info">
+
         <div class="panel-heading"> 
             <h3 class="panel-title"><?php echo $arreglo_noticia[0]['titulo_noticia']; ?></h3> 
         </div>
@@ -23,4 +27,5 @@ if ($noticia != null || $noticia != "") {
             <span class="label label-warning">El <?php echo $arreglo_noticia[0]['fecha_creacion']; ?></span>
         </div>
     </div>
+
 <?php } ?>

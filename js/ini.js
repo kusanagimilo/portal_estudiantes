@@ -85,8 +85,14 @@ function VerNoticiasIni() {
             data = retu;
         }
     });
+    
+    if ( $("#contenido_ini").length > 0 ) {
+         $("#contenido_ini").html(data);
+    }else{
+        $("#contenido").html(data);
+    }
 
-    $("#contenido_ini").html(data);
+   
 
 }
 
@@ -103,8 +109,11 @@ function VerDetalleNoticia(noticia) {
             data = retu;
         }
     });
-
-    $("#contenido_ini").html(data);
+    if ( $("#contenido_ini").length > 0 ) {
+        $("#contenido_ini").html(data);
+    }else{
+        $("#contenido").html(data);
+    }
 }
 
 function VerContacto() {
