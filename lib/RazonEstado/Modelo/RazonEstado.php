@@ -25,7 +25,7 @@ class RazonEstado {
         $link = $obj_conexion->Conectar();
 
         $sql_revisa_razon_estado = "select id_razon_estado FROM razon_estado WHERE id_estado_proceso = '" . $data['estado_proceso'] . "'
-                                    AND razon = '" . trim(utf8_decode($data['razon'])) . "'";
+                                    AND razon = '" . trim(utf8_decode($data['razon'])) . "' AND estado = 'AC'";
 
 
         $numero_filas = $obj_conexion->NumeroFilas($sql_revisa_razon_estado, $link);
@@ -103,6 +103,32 @@ class RazonEstado {
         $json = json_encode($arreglo_retorno);
 
         return $json;
+    }
+
+    public function EliminarRazon($data) {
+        session_start();
+        $arreglo_sesion = $_SESSION['Usuario'];
+        $obj_conexion = new BD();
+        $link = $obj_conexion->Conectar();
+
+        $arreglo_update = array(":id_razon_estado" => $data['razon_estado'],
+            ":estado" => 'EL',
+            ":id_usuario_modifico" => $arreglo_sesion['id_usuario']);
+
+
+        $update = "UPDATE razon_estado
+                   SET  estado= :estado,
+                   id_usuario_modifico=:id_usuario_modifico
+                   WHERE id_razon_estado = :id_razon_estado";
+
+        $resul = $link->prepare($update);
+        $resul->execute($arreglo_update);
+
+        if ($resul) {
+            return 1;
+        } else {
+            return 3;
+        }
     }
 
 }

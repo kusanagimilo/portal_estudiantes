@@ -24,7 +24,7 @@
                         <td>
                             <select id="tipo_reporte">
                                 <option value="">-seleccione-</option>
-                                <option value="casos_r">Casos realizados</option>
+                                <option value="casos_r">Registro de atención de casos</option>
                             </select>
                         </td>
                     </tr>

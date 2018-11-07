@@ -82,7 +82,7 @@ function RazonesPorEstado(estado_proceso) {
         //console.log(data.id_tipo_proceso);
         html += "<tr id='razon_" + data2.id_razon_estado + "'>" +
                 "<td>" + data2.razon + "</td>" +
-                "<td><input type='button' class='btn btn-danger' value='Eliminar'></td>" +
+                "<td><input type='button' class='btn btn-danger' value='Eliminar' onclick='EliminarRazon(" + data2.id_razon_estado + "," + estado_proceso + ")'></td>" +
                 "</tr>";
 
     });
@@ -117,4 +117,28 @@ function ListRazonEstado(input_estado_proceso, input_razon_estado) {
     $("#" + input_razon_estado + "").html(html);
 
 
+}
+
+function EliminarRazon(razon_estado, estado_proceso) {
+    var data;
+    $.ajax({
+        type: "POST",
+        url: "lib/RazonEstado/Controlador/RazonEstadoController.php",
+        async: false,
+        data: {
+            opcion: 'EliminarRazon',
+            razon_estado: razon_estado
+        },
+        success: function (retu) {
+            data = retu;
+        }
+    });
+
+    if (data == 1) {
+        alert("Se elimino correctamente la razon");
+        RazonesPorEstado(estado_proceso);
+    } else
+    {
+        alert("No se logro eliminar la razon");
+    }
 }

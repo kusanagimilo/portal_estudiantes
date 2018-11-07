@@ -18,7 +18,7 @@
             <img  src="img/ver_mis_casos.png" data-holder-rendered="true" > 
             <div class="caption"> 
                 <h3>Ver mis casos</h3> 
-                <p>En esta seccion puedes ver los casos creados por ti, ademaas puedes ver en que estado estan y agrgar mas archivos a estos casos</p> 
+                <p>En esta seccion puedes ver los casos creados por ti, ademas puedes ver en que estado estan y agrgar mas archivos a estos casos</p> 
                 <p>
 
                 <center><a href="#" onclick="VerMisCasos()" class="btn btn-default" role="button">Ver mis casos</a></center>

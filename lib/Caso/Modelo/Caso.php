@@ -26,14 +26,14 @@ class Caso {
 
 
 
-        $sql = "SELECT rtip.id_rol_tipo_proceso,tip.id_tipo_proceso,tip.tipo_proceso,tip.icono,count(tip.id_tipo_proceso) AS 'num_docs'
+        $sql = "SELECT rtip.id_rol_tipo_proceso,tip.id_tipo_proceso,tip.tipo_proceso,tip.icono,count(tip.id_tipo_proceso) AS 'num_docs',CHARACTER_LENGTH(tip.tipo_proceso) AS 'valor_nombre'
                 FROM rol_tipo_proceso rtip
                 INNER JOIN tipo_proceso tip ON rtip.id_tipo_proceso = tip.id_tipo_proceso
                 INNER JOIN documento_tipo_proceso doct ON doct.id_tipo_proceso = tip.id_tipo_proceso 
                 WHERE rtip.id_rol = " . $arreglo_sesion['id_rol'] . "
                 AND tip.estado = 'AC'
                 GROUP BY rtip.id_rol_tipo_proceso
-                ORDER BY num_docs";
+                ORDER BY valor_nombre";
 
         $resul = $obj_conexion->ResultSet($sql, $link);
 

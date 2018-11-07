@@ -411,3 +411,21 @@ function EstadoRazon(caso) {
     return data;
 
 }
+function DialogCasoDocs(id_tipo_proceso) {
+    $("#diag_documentos_" + id_tipo_proceso + "").attr('style', '');
+    $("#diag_documentos_" + id_tipo_proceso + "").dialog({
+        width: '400',
+        height: '400',
+        title: 'Documentos Caso',
+        modal: true,
+        buttons: {
+            "Cerrar": function ()
+            {
+                $("#diag_documentos_" + id_tipo_proceso + "").dialog('close');
+                $("#diag_documentos_" + id_tipo_proceso + "").dialog('destroy');
+                $("#diag_documentos_" + id_tipo_proceso + "").attr('style', 'display:none');
+            }
+        }
+    });
+
+}

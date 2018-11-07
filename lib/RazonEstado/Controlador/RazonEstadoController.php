@@ -19,4 +19,7 @@ if ($opcion == 'AlmacenarRazonEstado') {
 }if ($opcion == 'ListRazonEstado') {
     $retorno = $obj_razon_estado->ListRazonEstado($_POST);
     echo $retorno;
+}if ($opcion == 'EliminarRazon') {
+    $retorno = $obj_razon_estado->EliminarRazon($_POST);
+    echo $retorno;
 }

@@ -16,53 +16,53 @@ foreach ($arreglo_caosos as $key => $value) {
         <div class="thumbnail"> 
             <img style="width: 200px; height: 200px;" alt="100%x200" src="lib/Documentos/<?php echo $value['icono'] ?>" data-holder-rendered="true" > 
             <div class="caption">
-
-                <b><?php echo utf8_encode($value['tipo_proceso']); ?></b>
                 <br>
+                <center><b><?php echo utf8_encode($value['tipo_proceso']); ?></b></center>
                 <br>
+                <center>
+                    <p>
+                        <input type="button" name="ver_doc" value="Ver documentos"  class="btn btn-info" onclick="DialogCasoDocs(<?php echo $value['id_tipo_proceso']; ?>)"> 
+                        &nbsp;<input type="button" name="cre_caso" value="Crear caso" onclick="DialogCrearCaso(<?php echo $value['id_tipo_proceso']; ?>)" class="btn btn-primary"> 
 
-                <div class="panel-group">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" href="#collapse_<?php echo $value['id_tipo_proceso']; ?>">Click aquí para ver documentos asociados</a>
-                            </h4>
-                        </div>
-                        <div id="collapse_<?php echo $value['id_tipo_proceso']; ?>" class="panel-collapse collapse" >
-                            <ul >
-                                <?php
-                                foreach ($arreglo_documentos as $key2 => $value2) {
 
-                                    if ($usuario['rol'] == 'Estudiante') {
+                    </p>
+                </center>
+                <br>
+                <div id="diag_documentos_<?php echo $value['id_tipo_proceso']; ?>" style="display: none">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Documento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($arreglo_documentos as $key2 => $value2) {
 
-                                        if ($value2['nombre'] != 'Formato Acta Retiro Temporal' && $value2['nombre'] != 'Formato Acta Retiro Definitivo' && $value2['nombre'] != 'Formato Excusa' && $value2['nombre'] != 'Formato Supletorio' && $value2['nombre'] != 'Carta Presentación a Empresa') {
-                                            ?>
-                                            <li><a href="<?php echo $value2['url']; ?>" target="_blank"><?php echo $value2['nombre']; ?></a></li>
+                                if ($usuario['rol'] == 'Estudiante') {
 
-                                            <?php
-                                        }
-                                    } else {
+                                    if ($value2['nombre'] != 'Formato Acta Retiro Temporal' && $value2['nombre'] != 'Formato Acta Retiro Definitivo' && $value2['nombre'] != 'Formato Excusa' && $value2['nombre'] != 'Formato Supletorio' && $value2['nombre'] != 'Carta Presentación a Empresa') {
                                         ?>
-                                        <li><a href="<?php echo $value2['url']; ?>" target="_blank"><?php echo $value2['nombre']; ?></a></li>
+                                        <tr><td><a href="<?php echo $value2['url']; ?>" target="_blank"><?php echo $value2['nombre']; ?></a></td></tr>
 
                                         <?php
                                     }
+                                } else {
+                                    ?>
+                                    <tr>
+                                        <td><a href="<?php echo $value2['url']; ?>" target="_blank"><?php echo $value2['nombre']; ?></a></td>
+                                    </tr>
+
+                                    <?php
                                 }
-                                ?>
-                            </ul>
-                        </div>
-                    </div>
+                            }
+                            ?>
+                        </tbody>
+                        
+                    </table>
+
+
                 </div>
-
-
-
-
-                <p>
-                    <input type="button" name="cre_caso" value="Crear caso" onclick="DialogCrearCaso(<?php echo $value['id_tipo_proceso']; ?>)" class="btn btn-primary"> 
-
-                </p>
-                <br>
-
             </div> 
         </div> 
     </div>
