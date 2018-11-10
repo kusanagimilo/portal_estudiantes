@@ -1,7 +1,7 @@
 <?php
 session_start();
 $usuario = $_SESSION['Usuario'];
-
+var_dump($usuario);
 //$perfil = $usuario['PERFIL'];
 
 if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
@@ -94,14 +94,6 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
 
 
                             </div>
-
-                            <!--                            <div class="featureinfo">
-                                                            <h4 class="text-center">Title</h4>
-                                                            <p>
-                                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti atque, tenetur quam aspernatur corporis at explicabo nulla dolore necessitatibus doloremque exercitationem sequi dolorem architecto perferendis quas aperiam debitis dolor soluta!
-                                                            </p>
-                                                           
-                                                        </div>-->
                         </div>
 
 
