@@ -201,32 +201,39 @@ function DialogCambiarEstado(id_caso) {
 }
 
 function CambiarEstado(id_caso) {
-    var data;
-    $.ajax({
-        type: "POST",
-        url: "lib/Caso/Controlador/CasoController.php",
-        async: false,
-        data: {
-            id_caso: id_caso,
-            id_estado: $("#estado_proceso_l").val(),
-            razon_estado: $("#razon_estado").val(),
-            opcion: 'CambiarEstado'
-        },
-        success: function (retu) {
-            data = retu;
+    var confirma = confirm("¿ Está seguro de realizar esta acción ?");
+    if (confirma) {
+
+        $("#btn_cambio_estado").remove();
+        $("#contenedor_cargando").html("<center>CAMBIANDO ESTADO ESPERE POR FAVOR ...</center>");
+
+
+        var data;
+        $.ajax({
+            type: "POST",
+            url: "lib/Caso/Controlador/CasoController.php",
+            async: false,
+            data: {
+                id_caso: id_caso,
+                id_estado: $("#estado_proceso_l").val(),
+                razon_estado: $("#razon_estado").val(),
+                opcion: 'CambiarEstado'
+            },
+            success: function (retu) {
+                data = retu;
+            }
+        });
+
+        if (data == 1) {
+            alert("Se cambio de caso correctamente");
+            $("#diag_cam_caso").dialog('close');
+            $("#diag_cam_caso").dialog('destroy');
+            $("#diag_cam_caso").html("");
+            VerTotCasos();
+        } else if (data == 2) {
+            alert("No se pudo cambiar el estado comuniquiese con soporte");
         }
-    });
-
-    if (data == 1) {
-        alert("Se cambio de caso correctamente");
-        $("#diag_cam_caso").dialog('close');
-        $("#diag_cam_caso").dialog('destroy');
-        $("#diag_cam_caso").html("");
-        VerTotCasos();
-    } else if (data == 2) {
-        alert("No se pudo cambiar el estado comuniquiese con soporte");
     }
-
 }
 
 function DialogMostrarAdjuntos(id_caso, estado) {

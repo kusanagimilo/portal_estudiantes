@@ -1,7 +1,7 @@
 <?php
 $id_caso = $_POST['id_caso'];
 $estado = $_POST['estado'];
-if ($estado != 'SOLICITUD FINALIZADA') {
+if ($estado != 'FINALIZA') {
     ?>
 
     <script>
@@ -30,7 +30,7 @@ if ($estado != 'SOLICITUD FINALIZADA') {
 
 <div class="panel panel-default">
     <?php
-    if ($estado != 'SOLICITUD FINALIZADA') {
+    if ($estado != 'FINALIZA') {
         ?>
         <div class="panel-heading">
             <h3 class="panel-title">Adjuntar archivos</h3>

@@ -142,8 +142,19 @@ WHERE id_caso =  " . $id_caso . "";
                 $soporte = "<a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
             }
 
+            $estado_proceso = strtoupper($value['estado_proceso']);
+            $existe_finali = strpos($estado_proceso, 'FINALIZA');
+            
+            /*var_dump($existe_finali);
+            die();*/
+                
+           
+            
+            
+            if ($existe_finali !== false) {
 
-            if ($value['estado_proceso'] == 'SOLICITUD FINALIZADA') {
+                $estado = '"FINALIZA"';
+
                 $botones = "<input type='button' value='Ver informacion caso' onclick='DialogTablaInformacionCaso(" . $value['id_caso'] . ")' class='btn btn-default'><br>
                             <input type='button' value='Ver archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>" . $soporte;
             } else {

@@ -1,7 +1,7 @@
 <?php
 session_start();
 $usuario = $_SESSION['Usuario'];
-var_dump($usuario);
+//var_dump($usuario);
 //$perfil = $usuario['PERFIL'];
 
 if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {

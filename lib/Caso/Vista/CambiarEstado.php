@@ -53,10 +53,12 @@ $id_caso = $_POST['id_caso'];
                 </tr>
 
                 <tr>
-                    <td colspan="2"><center>
+                    <td colspan="2" id="contenedor_cargando">
+                <center>
 
-                    <button id="btoGuardarUsuario" name="btoGuardarUsuario" class="btn btn-success" type="submit" >Guardar</button>
-                </center></td>
+                    <button id="btn_cambio_estado"  name="btoGuardarUsuario" class="btn btn-success" type="submit" >Guardar</button>
+                </center>
+                </td>
                 </tr>
             </table>
         </form>
