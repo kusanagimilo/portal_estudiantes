@@ -76,7 +76,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                 </div><!-- /.container-fluid -->
             </nav>
 
-            <div class="container">
+            <div class="container-fluid">
                 <div class="iconcontainer">
                     <div class="row">
 

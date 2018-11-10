@@ -144,13 +144,13 @@ WHERE id_caso =  " . $id_caso . "";
 
             $estado_proceso = strtoupper($value['estado_proceso']);
             $existe_finali = strpos($estado_proceso, 'FINALIZA');
-            
-            /*var_dump($existe_finali);
-            die();*/
-                
-           
-            
-            
+
+            /* var_dump($existe_finali);
+              die(); */
+
+
+
+
             if ($existe_finali !== false) {
 
                 $estado = '"FINALIZA"';
@@ -406,8 +406,13 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
             $estado = '"' . utf8_encode($value['estado_proceso']) . '"';
 
             $botones = "";
-            //$estado = '"' . utf8_encode($value['estado_proceso']) . '"';
-            if ($value['estado_proceso'] == 'SOLICITUD FINALIZADA') {
+
+            $estado_proceso = strtoupper($value['estado_proceso']);
+            $existe_finali = strpos($estado_proceso, 'FINALIZA');
+
+            if ($existe_finali !== false) {
+
+                $estado = '"FINALIZA"';
                 $botones = "<input type='button' value='Ver informacion caso' onclick='DialogTablaInformacionCaso(" . $value['id_caso'] . ")' class='btn btn-default'>
                             <input type='button' value='Ver archivos' onclick='DialogMostrarAdjuntos(" . $value['id_caso'] . ",$estado)' class='btn btn-default'><br>
                             <a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
