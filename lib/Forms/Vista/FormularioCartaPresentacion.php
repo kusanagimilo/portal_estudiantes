@@ -91,9 +91,9 @@
 
 
             <tr>
-                <td colspan="2"><center>
+                <td colspan="2" id="contenedor_cargando"><center>
 
-                <input type="submit"  class="btn btn-default" value="Almacenar caso">
+                <input type="submit" id="btn_almacenar_caso" class="btn btn-default" value="Almacenar caso" >
             </center>
             </td>
             </tr>

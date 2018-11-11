@@ -82,8 +82,8 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         Reciban un cordial saludo. Por medio de esta comunicaci&oacute;n, me permito informar que
         <b><?php echo $tabla[0]['nombre']; ?> (<?php echo $tabla[0]['tipo_documento'] ?> <?php echo $tabla[0]['numero_documento'] ?>)</b>, estudiante del programa de
         Ingenier&iacute;a Industrial, no asistir&aacute; a clases durante los d&iacute;as comprendidos entre
-        las fechas <?php echo $tabla[0]['fecha_inicio_inasistencia']; ?> y <?php echo $tabla[0]['fecha_fin_inasistencia']; ?>. El motivo de la inasistencia corresponde a
-        <?php echo $motivo; ?>.
+        las fechas <b><?php echo $tabla[0]['fecha_inicio_inasistencia']; ?></b> y <b><?php echo $tabla[0]['fecha_fin_inasistencia']; ?></b>. El motivo de la inasistencia corresponde a
+        <b><?php echo $motivo; ?>.</b>
         <br>
         <br>
         En consecuencia, solicito tener en cuenta dicha situaci&oacute;n justificada para el
