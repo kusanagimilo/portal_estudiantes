@@ -29,8 +29,8 @@ if ($opcion == 'AdjuntarArchivoCaso') {
     $retorno = $obj_caso->TablaInformacionCasoAdmin($_POST);
     echo $retorno;
 }
-if ($opcion == 'InformacionRetiros') {
-    $retorno = $obj_caso->InformacionRetiros($_POST);
+if ($opcion == 'InformacionPlana') {
+    $retorno = $obj_caso->InformacionPlana($_POST);
     echo $retorno;
 }
 if ($opcion == 'EstadoRazon') {

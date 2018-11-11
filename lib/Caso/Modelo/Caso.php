@@ -136,7 +136,9 @@ WHERE id_caso =  " . $id_caso . "";
 
             if ($value['tipo_proceso'] == 'RETIRO TEMPORAL') {
                 $soporte = "<a href='lib/RetiroTemporal.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i>RETIRO TEMPORAL</a>";
-            } else if ($value['tipo_proceso'] == 'RETIRO DEFINITIVO') {
+            } else if ($value['tipo_proceso'] == 'EXCUSA PARA PROFESORES') {
+                $soporte = "<a target='_blank' href='lib/Excusa.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i>EXCUSA</a>";
+            } else if ($value['tipo_proceso'] == '') {
                 $soporte = "<a href='lib/RetiroDefinitivo.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i>RETIRO DEFINITIVO</a>";
             } else {
                 $soporte = "<a href='lib/pdf.php?caso=" . $value['id_caso'] . "'  class='btn btn-danger'><i class='icon-white icon-book'></i> PDF</a>";
@@ -664,7 +666,7 @@ AND cam.perm != 'admin'";
         return $tabla;
     }
 
-    public function InformacionRetiros($data) {
+    public function InformacionPlana($data) {
 
         $obj_conexion = new BD();
         $link = $obj_conexion->Conectar();

@@ -10,7 +10,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
     $obj_caso = new Caso();
 
     $data["id_caso"] = $_REQUEST['caso'];
-    $tabla = $obj_caso->InformacionRetiros($data);
+    $tabla = $obj_caso->InformacionPlana($data);
     $fecha_caso = $tabla[1];
     // InformacionRetiros
     ?>
