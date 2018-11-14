@@ -11,18 +11,18 @@ class EnvioNotificacion {
         $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
 
-        $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
-        $mail->Port = 587; //cambiar por el puerto por el cual se envian los correos en la javeriana
+        $mail->Host = 'smtp.gmail.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
+        $mail->Port = 465; //cambiar por el puerto por el cual se envian los correos en la javeriana
 
 
-        $mail->SMTPSecure = '';
+        $mail->SMTPSecure = 'ssl';
         $mail->SMTPAuth = true;
-        $mail->Username = "dept.ing.ind@javeriana.edu.co"; //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->Password = "Fabo3505"; // en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
+        $mail->Username = "kusanagimilo@gmail.com"; //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->Password = "camilo@64"; // en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
 
 
-        $mail->setFrom('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->addReplyTo('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->setFrom('kusanagimilo@gmail.com', 'kusanagimilo@gmail.com'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->addReplyTo('kusanagimilo@gmail.com', 'kusanagimilo@gmail.com'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
         // $mail->AddAddress("dept.ing.ind@javeriana.edu.co");//en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
 
 
@@ -34,6 +34,15 @@ class EnvioNotificacion {
         $caso = $data[0]['id_caso'];
         $estado = $data[0]['estado_proceso'];
         $fecha_modificacion = $data[0]['fecha_modificacion'];
+        $razon = $data[0]['razon'];
+
+        $adicion_razon = "";
+
+        if ($razon != "" || $razon == null) {
+            $adicion_razon = '<span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Razon cambio estado : ' . $razon . '</span>';
+        }
+
+
 
         $mensaje = <<<ini
 
@@ -61,8 +70,9 @@ class EnvioNotificacion {
                     <td bgcolor="#ffffff" >
 
                         <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Caso :  $caso</span>
-                        <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Nuevo estado : $estado </span>
                         <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Fecha de la modifiicación :  $fecha_modificacion</span>
+                        <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Nuevo estado : $estado </span>
+                        $adicion_razon
 
 
                     </td>
@@ -168,22 +178,22 @@ ini;
         $mail->CharSet = 'UTF-8';
         $mail->isSMTP();
 
-        $mail->Host = 'smtp.office365.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
-        $mail->Port = 587; //cambiar por el puerto por el cual se envian los correos en la javeriana
+        $mail->Host = 'smtp.gmail.com'; //cambiar por el host de la javeriana ejem : smtp.javeriana.edu.co o el que poosean
+        $mail->Port = 465; //cambiar por el puerto por el cual se envian los correos en la javeriana
 
 
-        $mail->SMTPSecure = '';
+        $mail->SMTPSecure = 'ssl';
         $mail->SMTPAuth = true;
-        $mail->Username = "dept.ing.ind@javeriana.edu.co"; //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->Password = "Fabo3505"; // en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
+        $mail->Username = "kusanagimilo@gmail.com"; //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->Password = "camilo@64"; // en esta linea de tiene que ir la clave de el usuario ingreasado en la linea anterior
 
 
-        $mail->setFrom('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        $mail->addReplyTo('dept.ing.ind@javeriana.edu.co', 'dept.ing.ind@javeriana.edu.co'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
-        // foreach ($array_correos as $key => $value) {
+        $mail->setFrom('kusanagimilo@gmail.com', 'kusanagimilo@gmail.com'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        $mail->addReplyTo('kusanagimilo@gmail.com', 'kusanagimilo@gmail.com'); //en esta linea de tiene que ir el nombre de usuario destinado para este proyecto ejemplo juan.cruz@javeriana.edu.co
+        foreach ($correo as $key => $value) {
 
-        $mail->addAddress($correo, $correo);
-        //}
+            $mail->addAddress($value, $value);
+        }
 
         $caso = $data[0]['id_caso'];
         $tipo_proceso = $data[0]['tipo_proceso'];
@@ -222,6 +232,12 @@ ini;
                 <span style="font-weight:700;font-size:16px;text-align:left;display:block;color:#232333;margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;padding-top:10px;padding-right:50px;padding-bottom:0px;padding-left:0px">Creado por :  $nombres</span>
 
                 
+            </td>
+        </tr>
+            <tr>
+            <td colspan="2">
+                <br>
+                IMPORTANTE: Su solicitud ha sido recibida y será procesada en estricto orden de llegada. Por favor, tenga en cuenta que la Carrera de Ingeniería Industrial, dará respuesta al estado del trámite en un plazo no mayor a tres (3) días hábiles a partir de este momento. Si su solicitud es de reserva de espacios, recibirá respuesta en un plazo no mayor a cinco (5) días hábiles a partir de este momento
             </td>
         </tr>
     </tbody>
