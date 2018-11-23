@@ -12,7 +12,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
     $data["id_caso"] = $_REQUEST['caso'];
     $tabla = $obj_caso->InformacionPlana($data);
     $fecha_caso = $tabla[1];
-   
+
 
     // InformacionRetiros
     ?>
@@ -44,7 +44,9 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <div style="margin-left: 270px;"><h4>PONTIFICIA UNIVERSIDAD JAVERIANA</h4></div>
         <div style="margin-left: 310px; margin-top: -31px;"><h4>FACULTAD DE INGENIERIA</h4></div>
         <div style="margin-left: 282px; margin-top: -31px;"><h4> SOLICITUD DE RETIRO TEMPORAL</h4></div>
-
+        <br>
+        <br>
+        <div style="margin-left: 700px;"><b><?php echo $tabla[0]['consecutivo']; ?></b></div>
         <div style="margin-top: 30px; font-size: 14px;">
             <table>
                 <tr>
@@ -52,18 +54,18 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                         Fecha de solicitud:
                     </td>
                     <td>
-                        <?php echo $fecha_caso;?>
+                        <?php echo $fecha_caso; ?>
                     </td>
                     <td td style="font-weight: bold">
-                        Programa academico:
+                        Programa Acad&eacute;mico:
                     </td>
-                    <td>CARRERA INGENIERIA INDUSTRIAL</td>
+                    <td>CARRERA INGENIER&Iacute;A INDUSTRIAL</td>
                 </tr>
                 <tr>
                     <td style="font-weight: bold">
                         Estudiante :</td>
                     <td>
-                        <?php echo $tabla[0]['nombre']; ?>
+                        <?php echo utf8_decode($tabla[0]['nombre']); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -80,13 +82,13 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                 </tr>
                 <tr>
                     <td style="font-weight: bold">
-                        Telefono:
+                        Tel&eacute;fono:
                     </td>
                     <td>
-                        <?php echo $tabla[0]['telefono']; ?>
+                        <?php echo utf8_decode($tabla[0]['telefono']); ?>
                     </td>
                     <td td style="font-weight: bold">
-                        Ultimo periodo cursado :
+                        &Uacute;ltimo per&iacute;odo cursado :
                     </td>
                     <td>
                         <?php echo $tabla[0]['ultimo_perido_cursado']; ?>
@@ -94,9 +96,9 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                 </tr>
                 <tr>
                     <td style="font-weight: bold">
-                        Direccion permanente:</td>
+                        Direcci&oacute;n Permanente:</td>
                     <td>
-                        <?php echo $tabla[0]['direccion']; ?>
+                        <?php echo utf8_decode($tabla[0]['direccion']); ?>
                     </td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -117,7 +119,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                     <td>
                         <?php echo $tabla[0]['periodo_retiro']; ?>
                     </td>
-                    <td style="font-weight: bold">Del año</td>
+                    <td style="font-weight: bold">Del a&ntilde;o</td>
                     <td> <?php echo $tabla[0]['anio_retiro']; ?></td>
                 </tr>
                 <tr>
@@ -127,15 +129,15 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                     <td>
                         <?php echo $tabla[0]['periodo_ingreso']; ?>
                     </td>
-                    <td style="font-weight: bold">Del año</td>
+                    <td style="font-weight: bold">Del a&ntilde;o</td>
                     <td><?php echo $tabla[0]['anio_ingreso']; ?></td>
                 </tr>
             </table>
             <table>
                 <tr>
-                    <td style="font-weight: bold">Por razones de indole:</td>
+                    <td style="font-weight: bold">Por razones de &iacute;ndole:</td>
                     <td>
-                        <?php echo $tabla[0]['motivo']; ?>
+                        <?php echo utf8_decode($tabla[0]['motivo']); ?>
                     </td>
                 </tr>
 
@@ -144,7 +146,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                 <tr>
                     <td style="font-weight: bold">Descripcion de la causa:</td>
                     <td>
-                        <?php echo $tabla[0]['descripcion_motivo']; ?>
+                        <?php echo utf8_decode($tabla[0]['causa_retiro_adm']); ?>
                     </td>
                 </tr>
             </table>
@@ -158,24 +160,24 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                 </tr>
                 <tr>
                     <td style="font-weight: bold">
-                        <?php echo $tabla[0]['nombre']; ?> (Estudiante)
+                        <?php echo utf8_decode($tabla[0]['nombre']); ?> (Estudiante)
                     </td>
                 </tr>
             </table>
             <br>
             <div style="border: 1px 1px 1px 1px solid #00000; padding: 2px 2px 2px 2px;">
-                * Nota: Para determinar la situacion academica de retiro del estudiante 
-                sera necesario adjuntar el certificado de notas que incluye el ultimo periodo cursado.
+                * Nota: Para determinar la situaci&oacute;n acad&eacute;mica de retiro del estudiante ser&aacute; necesario adjuntar el 
+                certificado de notas que incluye el &uacute;ltimo periodo cursado.  
             </div>
         </div>
-        <div style="margin-left: 300px;"><h4>Datos de el periodo academico</h4></div>
+        <div style="margin-left: 300px;"><h4>Datos de el periodo acad&eacute;mico</h4></div>
         <table>
             <tr>
                 <td style="font-weight: bold">
-                    Estado academico:
+                    Estado acad&eacute;mico:
                 </td>
                 <td>
-                    <?php echo $tabla[0]['estado_academico']; ?>
+                    <?php echo utf8_decode($tabla[0]['estado_academico']); ?>
                 </td>
             </tr>
             <tr>
@@ -183,7 +185,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
                     Promedio acumulado:
                 </td>
                 <td>
-                    <?php echo $tabla[0]['promedio_ponderado_acumulado']; ?>
+                    <?php echo utf8_decode($tabla[0]['promedio_ponderado_acumulado']); ?>
                 </td>
             </tr>
         </table>
@@ -197,7 +199,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
             </tr>
             <tr>
                 <td style="font-weight: bold">
-                    <?php echo $tabla[0]['nombre_director_carrera']; ?> (Director carrera)
+                    <?php echo utf8_decode($tabla[0]['nombre_director_carrera']); ?> (Director carrera)
                 </td>
             </tr>
         </table>
@@ -211,7 +213,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         $html2pdf = new HTML2PDF('P', 'b4', 'es', false, 'ISO-8859-15', array(0, 0, 0, 0));
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
-        $html2pdf->Output('SOLICITUD.pdf', 'D');
+        $html2pdf->Output('SOLICITUD.pdf', 'I');
     } catch (HTML2PDF_exception $e) {
         echo $e;
         exit;

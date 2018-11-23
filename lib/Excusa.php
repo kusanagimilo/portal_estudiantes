@@ -13,18 +13,25 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
     $data["id_caso"] = $_REQUEST['caso'];
     $tabla = $obj_caso->InformacionPlana($data);
 
+//    echo "<pre>";
+//    var_dump($tabla);
+//    echo "</pre>";
+//    die();
+
     $fecha_caso = $tabla[1];
 
 
     $hoy = strftime("%d %B") . " de " . date('Y');
 
 
-    $motivo = "";
-    if ($tabla[0]['motivo_inasistencia'] == 'OTRO') {
-        $motivo = $tabla[0]['otro_motivo_excusa'];
-    } else {
-        $motivo = $tabla[0]['motivo_inasistencia'];
-    }
+    $motivo = $tabla[0]['motivo_excusa_adm'];
+    $director = utf8_decode($tabla[0]['nombre_director_carrera']);
+    /*
+      if ($tabla[0]['motivo_inasistencia'] == 'OTRO') {
+      $motivo = $tabla[0]['otro_motivo_excusa'];
+      } else {
+      $motivo = $tabla[0]['motivo_inasistencia'];
+      } */
     ?>
     <style>
         /* 
@@ -57,6 +64,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         <br>
+        <div style="margin-left: 700px;"><b><?php echo $tabla[0]['consecutivo']; ?></b></div>
         <br>
         <br>
         <br>
@@ -72,7 +80,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         <br>
-        Estimados profesores:
+        <?php echo utf8_decode($tabla[0]['saludo']); ?> profesores:
         <br>
         <br>
         <br>
@@ -80,10 +88,10 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         Reciban un cordial saludo. Por medio de esta comunicaci&oacute;n, me permito informar que
-        <b><?php echo $tabla[0]['nombre']; ?> (<?php echo $tabla[0]['tipo_documento'] ?> <?php echo $tabla[0]['numero_documento'] ?>)</b>, estudiante del programa de
+        <b><?php echo utf8_decode($tabla[0]['nombre']); ?> (<?php echo $tabla[0]['tipo_documento'] ?> <?php echo $tabla[0]['numero_documento'] ?>)</b>, estudiante del programa de
         Ingenier&iacute;a Industrial, no asistir&aacute; a clases durante los d&iacute;as comprendidos entre
         las fechas <b><?php echo $tabla[0]['fecha_inicio_inasistencia']; ?></b> y <b><?php echo $tabla[0]['fecha_fin_inasistencia']; ?></b>. El motivo de la inasistencia corresponde a
-        <b><?php echo $motivo; ?>.</b>
+        <b><?php echo utf8_decode($motivo); ?>.</b>
         <br>
         <br>
         En consecuencia, solicito tener en cuenta dicha situaci&oacute;n justificada para el
@@ -120,7 +128,7 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         <br>
-        <b>Ing. David Barrera Ferro</b><br>
+        <b><?php echo $director; ?></b><br>
         Director<br>
         Carrera Ingenier&iacute;a Industrial<br>
     </page>

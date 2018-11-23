@@ -259,6 +259,10 @@ function AlmacenaCartaPresentacion() {
     });
     var confirma = confirm("Esta seguro de realizar esta accion")
     if (confirma) {
+
+        $("#btn_almacenar_caso").remove();
+        $("#contenedor_cargando").html("<center>ALMACENANDO EL CASO ESPERE POR FAVOR ...</center>");
+
         var data_r;
         $.ajax({
             type: "POST",

@@ -472,6 +472,17 @@ WHERE cas.id_caso = '" . $data['id_caso'] . "'";
         $ejecucion = $result->execute($arreglo_up);
 
         if ($ejecucion) {
+            
+            $arreglo_in = array(":id_estado" => $data['id_estado'],
+            ":id_usuario_modifico" => $arreglo_sesion['id_usuario'],
+            ":id_caso" => $data['id_caso'],
+            ":id_razon_estado" => $data['razon_estado']);
+
+            $sql_insert_historico = "INSERT INTO historico_caso(id_caso,id_usuario_creo,id_estado,id_razon_estado)
+                                     VALUES(:id_caso,:id_usuario_modifico,:id_estado,:id_razon_estado)";
+            $result_h = $link->prepare($sql_insert_historico);
+            $ejecucion_h = $result_h->execute($arreglo_in);
+
 
             $arreglo_correos = array();
 

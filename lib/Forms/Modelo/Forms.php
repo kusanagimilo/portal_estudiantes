@@ -87,12 +87,12 @@ AND cam.perm = 'total'";
 
                 $sql_insert_1 .= "otro_motivo_excusa,";
                 $sql_insert_2 .= ":otro_motivo_excusa,";
-                $arreglo_in[':otro_motivo_excusa'] = $data['otro_motivo_excusa'];
+                $arreglo_in[':otro_motivo_excusa'] = utf8_decode($data['otro_motivo_excusa']);
             } else if ($value['campo_identi'] == 'motivo_inasistencia' && $data['motivo_inasistencia'] == 'INCONVENIENTE PERSONAL') {
 
                 $sql_insert_1 .= "situacion_fuerza_mayor,";
                 $sql_insert_2 .= ":situacion_fuerza_mayor,";
-                $arreglo_in[':situacion_fuerza_mayor'] = $data['situacion_fuerza_mayor'];
+                $arreglo_in[':situacion_fuerza_mayor'] = utf8_decode($data['situacion_fuerza_mayor']);
             } else if ($value['campo_identi'] == 'medio_cumplio_requisito' && $data['medio_cumplio_requisito'] == 'NIVELES CURSADOS EN LA UNIVERSIDAD') {
 
                 $sql_insert_1 .= "nivel_clasificacion,nivel_cursado_aprobado,";
@@ -259,12 +259,12 @@ AND cam.perm = 'admin'";
             ":numero_documento" => $numeros_documentos_alumnos,
             ":id_javeriana" => $ids_javeriana_alumnos,
             ":telefono" => $telefonos_alumnos,
-            ":correo_electronico" => $correos_alumnos,
-            ":nombre_responsable_empresa" => $data["nombre_responsable_empresa"],
-            ":cargo_responsable_empresa" => $data["cargo_responsable_empresa"],
-            ":nombre_empresa" => $data["nombre_empresa"],
-            ":nombre_asignatura" => $data["nombre_asignatura"],
-            ":nombre_profesor" => $data["nombre_profesor"]);
+            ":correo_electronico" => utf8_decode($correos_alumnos),
+            ":nombre_responsable_empresa" => utf8_decode($data["nombre_responsable_empresa"]),
+            ":cargo_responsable_empresa" => utf8_decode($data["cargo_responsable_empresa"]),
+            ":nombre_empresa" => utf8_decode($data["nombre_empresa"]),
+            ":nombre_asignatura" => utf8_decode($data["nombre_asignatura"]),
+            ":nombre_profesor" => utf8_decode($data["nombre_profesor"]));
 
 
 

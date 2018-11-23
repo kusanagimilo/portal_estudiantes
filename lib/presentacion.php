@@ -1,7 +1,6 @@
 <?php
 session_start();
 $usuario = $_SESSION['Usuario'];
-header('Content-type: text/html; charset=utf-8');
 date_default_timezone_set('America/Bogota');
 if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
     ob_start();
@@ -17,9 +16,14 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
     $asignaturas = trim($tabla[0]['nombre_asignatura']);
     $profe = $tabla[0]['nombre_profesor'];
     $hoy = strftime("%d %B") . " de " . date('Y');
+    $director = utf8_decode($tabla[0]['nombre_director_carrera']);
     /* var_dump($tabla[0]['nombre_profesor']);
       die(); */
     // InformacionRetiros
+//    echo "<pre>";
+//    var_dump($tabla);
+//    echo "</pre>";
+//    die();
     ?>
     <style>
         /* 
@@ -52,18 +56,19 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         Bogot&aacute; D.C., <?php echo $hoy; ?>
         <br>
         <br>
+        <br>        
+        <div style="margin-left: 700px;"><b><?php echo $tabla[0]['consecutivo']; ?></b></div>
         <br>
         <br>
-        <br>
-        Tratamiento<br>
-        <?php echo $tabla[0]['nombre_responsable_empresa']; ?><br>
-        <?php echo $tabla[0]['cargo_responsable_empresa']; ?><br>
-        <?php echo $tabla[0]['nombre_empresa']; ?><br>
+        <?php echo utf8_decode($tabla[0]['tratamiento']); ?><br>
+        <?php echo utf8_decode($tabla[0]['nombre_responsable_empresa']); ?><br>
+        <?php echo utf8_decode($tabla[0]['cargo_responsable_empresa']); ?><br>
+        <?php echo utf8_decode($tabla[0]['nombre_empresa']); ?><br>
         Ciudad<br>
         <br>
         <br>
         <br>
-        Estimado <?php echo $tabla[0]['nombre_responsable_empresa']; ?>,<br><br> 
+        <?php echo utf8_decode($tabla[0]['saludo']); ?> <?php echo utf8_decode($tabla[0]['nombre_responsable_empresa']); ?>,<br><br> 
         Atentamente nos dirigimos a usted con el fin de solicitar su autorizaci&oacute;n para que los estudiantes del programa de Ingenier&iacute;a 
         Industrial mencionados a continuaci&oacute;n, realicen una visita t&eacute;cnica a las instalaciones de su empresa:
         <br>
@@ -101,8 +106,8 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         <br>
-        Esta visita permitir&aacute; el desarrollo de un trabajo de investigaci&oacute;n para la asignatura(s) <?php echo $asignaturas; ?>, con los
-        profesor(es) <?php echo $profe ?>. Los estudiantes se comprometen a acatar y respetar las normas que ustedes 
+        Esta visita permitir&aacute; el desarrollo de un trabajo de investigaci&oacute;n para la asignatura(s) <?php echo utf8_decode($asignaturas); ?>, con los
+        profesor(es) <?php echo utf8_decode($profe) ?>. Los estudiantes se comprometen a acatar y respetar las normas que ustedes 
         tengan establecidas, teniendo en cuenta que la informaci&oacute;n ser&aacute; utilizada para fines netamente acad&eacute;micos.
         <br>
         <br>
@@ -115,9 +120,9 @@ if ($usuario['nombre_usuario'] != NULL || $usuario['nombre_usuario'] != '') {
         <br>
         <br>
         <br>
-         <br>
         <br>
-        <b>Ing. David Barrera Ferro</b>
+        <br>
+        <b><?php echo $director; ?></b>
     </page>
     <?php
     $content = ob_get_clean();
